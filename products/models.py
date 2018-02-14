@@ -10,6 +10,8 @@ from django.contrib.admin import widgets
 from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator
 
+from locations.models import Location
+
 from arena.utils import unique_slug_generator
 
 def get_filename_ext(filename):
@@ -60,16 +62,6 @@ class ProductManager(models.Manager):
         
     def search(self, query):
         return self.get_queryset().active().search(query)
-        
-# Create your models here. Almost always name in singular.
-class Location(models.Model):
-    stand_location = models.CharField(max_length=200)
-    
-    def __unicode__(self):
-        return self.stand_location
-    
-    def __str__(self):
-        return self.stand_location
         
 class Product(models.Model):
     title = models.CharField(max_length=120)
