@@ -2,10 +2,14 @@ from __future__ import unicode_literals
 
 import random
 import os
+from django import forms #combine elsewhere?
 from django.db import models
 from django.db.models import Q
 from django.db.models.signals import pre_save, post_save
 from django.core.urlresolvers import reverse
+from django.contrib.admin import widgets
+
+
 
 from arena.utils import unique_slug_generator
 
@@ -15,6 +19,11 @@ STAND_NAME_CHOICES = (
     ('griddled sandwiches', 'Griddled Sandwiches'),
     ('craft burger & sausage', 'Craft Burger & Sausage'),
     ('noodled', 'Noodled'),
+)
+
+LOCATIONS = (
+    ('first_location', 'First Location'),
+    ('second_location', 'Second Location')
 )
 
 def get_filename_ext(filename):
@@ -69,28 +78,42 @@ class ProductManager(models.Manager):
         return self.get_queryset().active().search(query)
         
 # Create your models here. Almost always name in singular.
+
+class Location(models.Model):
+    stand_location = models.CharField(max_length=200)
+    
+    def __unicode__(self):
+        return self.stand_location
+    
+    def __str__(self):
+        return self.stand_location
+        
 class Product(models.Model):
     title = models.CharField(max_length=120)
-    slug = models.SlugField(blank=True, unique=True)
-    stand = models.CharField(max_length=120, default='', choices=STAND_NAME_CHOICES)
-    location = models.CharField(max_length=120, default='Default')
     description = models.TextField()
-    price = models.DecimalField(decimal_places=2,max_digits=5,default=0.00) 
+    price = models.DecimalField(decimal_places=2,max_digits=5,default=0.00)
+    location = models.ManyToManyField(Location)
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
+    slug = models.SlugField(blank=True, unique=True)
     featured = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
     timestamp = models.DateTimeField(auto_now_add = True)
     
+    filter_horizontal = ('my_m2m_field',)
+    
     objects = ProductManager()
+    
+    def locations(self):
+        return ",\n".join([str(item) for item in self.location.all()])
     
     def get_absolute_url(self):
         return reverse("products:detail", kwargs={"slug": self.slug})
     
-    def __str__(self):
-        return self.title #python 3
-    
     def __unicode__(self):
         return self.title #python 2
+    
+    def __str__(self):
+        return self.title #python 3, makes obj reference return title
     
     @property
     def name(self):
