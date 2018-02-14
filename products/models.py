@@ -6,25 +6,11 @@ from django import forms #combine elsewhere?
 from django.db import models
 from django.db.models import Q
 from django.db.models.signals import pre_save, post_save
-from django.core.urlresolvers import reverse
 from django.contrib.admin import widgets
-
-
+from django.core.urlresolvers import reverse
+from django.core.validators import MinValueValidator
 
 from arena.utils import unique_slug_generator
-
-STAND_NAME_CHOICES = (
-    ('the market bar', 'The Market Bar'),
-    ('crust pizza', 'Crust Pizza'),
-    ('griddled sandwiches', 'Griddled Sandwiches'),
-    ('craft burger & sausage', 'Craft Burger & Sausage'),
-    ('noodled', 'Noodled'),
-)
-
-LOCATIONS = (
-    ('first_location', 'First Location'),
-    ('second_location', 'Second Location')
-)
 
 def get_filename_ext(filename):
     base_name = os.path.basename(filename)
@@ -32,8 +18,6 @@ def get_filename_ext(filename):
     return name, ext
 
 def upload_image_path(instance, filename):
-    print(instance)
-    print(filename)
     new_filename = random.randint(1,3759237)
     name, ext = get_filename_ext(filename)
     final_filename = '{new_filename}{ext}'.format(new_filename=new_filename, ext=ext)
@@ -78,7 +62,6 @@ class ProductManager(models.Manager):
         return self.get_queryset().active().search(query)
         
 # Create your models here. Almost always name in singular.
-
 class Location(models.Model):
     stand_location = models.CharField(max_length=200)
     
@@ -91,7 +74,7 @@ class Location(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField()
-    price = models.DecimalField(decimal_places=2,max_digits=5,default=0.00)
+    price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
     location = models.ManyToManyField(Location)
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     slug = models.SlugField(blank=True, unique=True)
@@ -100,7 +83,7 @@ class Product(models.Model):
     timestamp = models.DateTimeField(auto_now_add = True)
     
     filter_horizontal = ('my_m2m_field',)
-    
+
     objects = ProductManager()
     
     def locations(self):

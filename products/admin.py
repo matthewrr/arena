@@ -20,14 +20,10 @@ class ProductAdmin(admin.ModelAdmin):
             vertical,
         )
         return super(ProductAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
-    
-
 
 class LocationAdmin(admin.ModelAdmin):
     list_display = ['stand_location']
     search_fields = ['stand_location']
-
-from django.contrib.admin import widgets
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Location, LocationAdmin)
