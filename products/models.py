@@ -64,6 +64,7 @@ class ProductManager(models.Manager):
         return self.get_queryset().active().search(query)
         
 class Product(models.Model):
+    code = models.CharField(max_length=120, default='')
     title = models.CharField(max_length=120, default='')
     description = models.TextField()
     price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
