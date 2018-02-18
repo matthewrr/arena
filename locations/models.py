@@ -4,7 +4,8 @@ from django.db import models
 
 # Create your models here.
 class Location(models.Model):
-    stand_location = models.CharField(max_length=200)
+    stand_name = models.CharField(max_length=200,default='')
+    stand_location = models.CharField(max_length=200,default='')
     
     def __unicode__(self):
         return self.stand_location

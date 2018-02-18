@@ -4,7 +4,7 @@ from .models import Location
 
 # Register your models here.
 class LocationAdmin(admin.ModelAdmin):
-    list_display = ['stand_location']
-    search_fields = ['stand_location']
+    list_display = ['stand_name','stand_location']
+    search_fields = ['stand_name','stand_location']
     
 admin.site.register(Location, LocationAdmin)
