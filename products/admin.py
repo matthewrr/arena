@@ -8,7 +8,7 @@ from django.contrib.admin import widgets
 
 class ProductAdmin(admin.ModelAdmin):
 
-    list_display = ['code','__str__','price','locations','slug','active','featured']
+    list_display = ['__str__','price','locations','slug','category','active','featured','gluten_free','vegetarian','alt_vegetarian']
     
     class Meta:
         model = Product
