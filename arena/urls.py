@@ -4,14 +4,15 @@ from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from search.views import search_page
+#from search.views import search_page
 
 urlpatterns = [
     # url(r'^$', home_page, name='home'),
     # url(r'^about/$', about_page, name='about'),
     # url(r'^contact/$', contact_page, name='contact'),
     url(r'^products/', include("products.urls", namespace='products')),
-    url(r'^search/$', search_page, name='search'),
+    #url(r'^search/$', search_page, name='search'),
+    url(r'^search/', include("search.urls", namespace='search')),
     url(r'^admin/', admin.site.urls),
 ]
 
