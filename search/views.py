@@ -19,6 +19,9 @@ class SearchProductView(ListView):
         query = request.GET.get('q')
         vegetarian = request.GET.get('vegetarian')
         gluten_free = request.GET.get('gluten_free')
+        category = request.GET.get('category')
+        print(category)
+        
         result = Product.objects.all()
         
         
@@ -35,5 +38,7 @@ class SearchProductView(ListView):
             result = result.filter(vegetarian = True)
         if gluten_free:
             result = result.filter(gluten_free = True)
-        #> Entry.objects.filter(authors__name=F('blog__name'))
+        if category:
+            result = result.filter(category = category.title())
+
         return result
