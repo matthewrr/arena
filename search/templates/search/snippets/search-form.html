@@ -1,8 +1,39 @@
 <form method='GET' action='{% url "search:query" %}' class="form my-2 my-lg-0">
   <div class='input-group'>
     <input class="form-control" type="search" placeholder="Search" name="q" aria-label="Search" value="{{ request.GET.q }}">
+    
     <span class='input-group-btn'>
       <button class="btn btn-outline-success" type="submit">Search</button>
     </span>
+    
   </div>
+    
+  <div class="form-control">
+    
+    <a>Dietary Restrictions: </a>
+    
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" id="vegetarian" name="vegetarian" value="vegetarian"> Vegetarian
+      </label>
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" id="gluten_free" name="gluten_free" value="gluten_free"> Gluten-Free
+      </label>
+    </div>
+    
+    <div class="form-check form-check-inline">
+      
+      <a>Category: </a>
+      
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" id="vegetarian" name="vegetarian" value="vegetarian"> Meal
+      </label>
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" id="gluten_free" name="gluten_free" value="gluten_free"> Snack / Dessert
+      </label>
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" id="gluten_free" name="gluten_free" value="gluten_free"> Beverage
+      </label>
+    </div>
+  
 </form>

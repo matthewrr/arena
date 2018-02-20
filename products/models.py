@@ -10,6 +10,10 @@ from django.contrib.admin import widgets
 from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator
 
+from django import forms
+from django.contrib.auth.models import User, Group
+import django_filters
+
 from locations.models import Location
 
 from arena.utils import unique_slug_generator
@@ -36,6 +40,12 @@ class ProductQuerySet(models.query.QuerySet):
     def featured(self):
         return self.filter(featured=True, active=True)
     
+    def vegetarian(self):
+        return self.filter(vegetarian=True, active=True)
+        
+    def gluten_free(self):
+        return self.filter(gluten_free=True, active=True)
+    
     def search(self, query):
         lookups = (Q(title__icontains=query) |
                    Q(description__icontains=query) |
@@ -50,9 +60,15 @@ class ProductManager(models.Manager):
     
     def all(self):
         return self.get_queryset().active()
-    
+
     def featured(self):
         return self.get_queryset().featured()
+    
+    def vegetarian(self):
+        return self.get_queryset().vegetarian()
+        
+    def gluten_free(self):
+        return self.get_queryset().gluten_free()
     
     def get_by_id(self, id):
         qs = self.get_queryset().filter(id=id)
@@ -88,11 +104,11 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("products:detail", kwargs={"slug": self.slug})
     
-    def __unicode__(self):
-        return self.title #python 2
+    # def __unicode__(self):
+    #     return self.title #python 2
     
     def __str__(self):
-        return self.title #python 3, makes obj reference return title
+        return self.title
     
     @property
     def name(self):
