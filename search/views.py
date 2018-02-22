@@ -21,9 +21,8 @@ class SearchProductView(ListView):
         gluten_free = request.GET.get('gluten_free')
         category = request.GET.get('category')
         print(category)
-        
+
         result = Product.objects.all()
-        
         
         if query:
             query_list = query.split(' ')
@@ -39,6 +38,7 @@ class SearchProductView(ListView):
         if gluten_free:
             result = result.filter(gluten_free = True)
         if category:
-            result = result.filter(category = category.title())
+            result = result.filter(category = category)
+            #result = result.filter(category = category.title())
 
         return result

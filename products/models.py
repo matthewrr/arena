@@ -18,6 +18,18 @@ from locations.models import Location
 
 from arena.utils import unique_slug_generator
 
+CATEGORIES = [
+    ('food', 'Food'),
+    ('beverage','Beverage'),
+]
+
+SUBCATEGORIES = [
+    ('meal', 'Meal'),
+    ('snack', 'Snack'),
+    ('alcoholic','Alcoholic'),
+    ('non-alcoholic', 'Non-Alcoholic'),
+]
+
 def get_filename_ext(filename):
     base_name = os.path.basename(filename)
     name, ext = os.path.splitext(base_name)
@@ -80,7 +92,8 @@ class ProductManager(models.Manager):
         return self.get_queryset().active().search(query)
         
 class Product(models.Model):
-    category = models.CharField(max_length=120, default='')
+    category = models.CharField(max_length=256, choices=CATEGORIES)
+    sub_category = models.CharField(max_length=120, default='---', choices=SUBCATEGORIES)
     title = models.CharField(max_length=120, default='')
     description = models.TextField()
     price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
@@ -89,6 +102,7 @@ class Product(models.Model):
     slug = models.SlugField(blank=True, unique=True)
     active = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
+    #image = models.BooleanField(default=False)
     gluten_free = models.BooleanField(default=False)
     vegetarian = models.BooleanField(default=False)
     alt_vegetarian = models.BooleanField(default=False)

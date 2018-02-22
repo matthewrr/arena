@@ -82,7 +82,15 @@ def product_detail_view(request, pk=None, *args, **kwargs):
         'object': instance
     }
     return render(request, "products/detail.html", context)
-    
-    
+
+# class ProductCreateView(ProductCreateView):
+#     model = Product
+#     form_class = ProductForm
+#     success_url = reverse_lazy('person_changelist')
+
+# def load_options(request):
+#     category_id = request.GET.get('category')
+#     cities = City.objects.filter(country_id=country_id).order_by('name')
+#     return render(request, 'hr/city_dropdown_list_options.html', {'cities': cities})
     
     
