@@ -3,23 +3,23 @@
         <div class="form-check form-check-inline">
           
       <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="vegetarian" name="vegetarian" value="vegetarian"> Appetizer
+        <input class="with-gap" type="checkbox" id="appetizer" name="course" value="appetizer"> Appetizer
       </label>
       <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="gluten_free" name="gluten_free" value="gluten_free"> Entree
+        <input class="with-gap" type="checkbox" id="entree" name="course" value="entree"> Entree
       </label>
       <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="gluten_free" name="gluten_free" value="gluten_free"> Dessert
+        <input class="with-gap" type="checkbox" id="dessert" name="course" value="dessert"> Dessert
       </label>
     </div>
     
     <div class="form-check form-check-inline">
       <a>Dietary Restrictions: </a>
       <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="vegetarian" name="vegetarian" value="vegetarian"> Vegetarian
+        <input class="with-gap" type="checkbox" id="vegetarian" name="diet" value="vegetarian"> Vegetarian
       </label>
       <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="gluten_free" name="gluten_free" value="gluten_free"> Gluten-Free
+        <input class="with-gap" type="checkbox" id="gluten_free" name="diet" value="gluten_free"> Gluten-Free
       </label>
     </div>
     
@@ -32,10 +32,10 @@
       <a>Category: </a>
       
       <label class="form-check-label">
-        <input class="with-gap" type="radio" id="category" name="category" value="food"> Alcohol
+        <input class="with-gap" type="checkbox" id="alcohol" name="beverage_type" value="alcohol"> Alcohol
       </label>
       <label class="form-check-label">
-        <input class="with-gap" type="radio" id="category" name="category" value="beverage"> Non-Alcohol
+        <input class="with-gap" type="checkbox" id="non_alcohol" name="beverage_type" value="non_alcohol"> Non-Alcohol
       </label>
     </div>
     
@@ -44,13 +44,13 @@
       <a>Type (If Alcohol): </a>
       
       <label class="form-check-label">
-        <input class="with-gap" type="radio" id="category" name="category" value="food"> Beer
+        <input class="with-gap" type="checkbox" id="beer" name="alcohol_type" value="beer"> Beer
       </label>
       <label class="form-check-label">
-        <input class="with-gap" type="radio" id="category" name="category" value="beverage"> Wine & Cider
+        <input class="with-gap" type="checkbox" id="wine_cider" name="alcohol_type" value="wine_cider"> Wine & Cider
       </label>
       <label class="form-check-label">
-        <input class="with-gap" type="radio" id="category" name="category" value="beverage"> Hard Alcohol
+        <input class="with-gap" type="checkbox" id="hard_alcohol" name="alcohol_type" value="hard_alcohol"> Hard Alcohol
       </label>
     </div>
     
@@ -59,11 +59,20 @@
       <a>Serving: </a>
       
       <label class="form-check-label">
-        <input class="with-gap" type="radio" id="category" name="category" value="food"> Cup
+        <input class="with-gap" type="checkbox" id="cup" name="serving_type" value="cup"> Cup
       </label>
       <label class="form-check-label">
-        <input class="with-gap" type="radio" id="category" name="category" value="beverage"> Can / Bottle (gray if not beer)
+        <input class="with-gap" type="checkbox" id="can_bottle" name="serving_type" value="can_bottle"> Can / Bottle
       </label>
     </div>
     
+  
+q: 'custom search'
+category: all, food, beverage
     
+course: appetizer, entree, dessert
+diet: vegetarian, gluten_free
+beverage_type: alcohol, non_alcohol
+alcohol_type: beer, wine_cider, hard_alcohol
+serving_type: cup, can_bottle
+

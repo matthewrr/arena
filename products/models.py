@@ -18,16 +18,31 @@ from locations.models import Location
 
 from arena.utils import unique_slug_generator
 
-CATEGORIES = [
+CATEGORY = [
     ('food', 'Food'),
     ('beverage','Beverage'),
 ]
-
-SUBCATEGORIES = [
-    ('meal', 'Meal'),
-    ('snack', 'Snack'),
-    ('alcoholic','Alcoholic'),
-    ('non-alcoholic', 'Non-Alcoholic'),
+COURSE = [
+    ('appetizer','Appetizer'),
+    ('entree', 'Entree'),
+    ('dessert', 'Dessert'),
+]
+DIET = [
+    ('vegetarian', 'Vegetarian'),
+    ('gluten_free', 'Gluten Free'),
+]
+BEVERAGE_TYPE = [
+    ('alcohol', 'Alcohol'),
+    ('non_alcohol', 'Non-Alcohol'),
+]
+ALCOHOL_TYPE = [
+    ('beer', 'Beer'),
+    ('wine_cider','Wine/Cider'),
+    ('hard_alcohol','Hard Alcohol'),
+]
+SERVING_TYPE = [
+    ('cup', 'Cup'),
+    ('can_bottle', 'Can/Bottle'),
 ]
 
 def get_filename_ext(filename):
@@ -53,10 +68,10 @@ class ProductQuerySet(models.query.QuerySet):
         return self.filter(featured=True, active=True)
     
     def vegetarian(self):
-        return self.filter(vegetarian=True, active=True)
+        return self.filter(v=True, active=True)
         
-    def gluten_free(self):
-        return self.filter(gluten_free=True, active=True)
+    def gf(self):
+        return self.filter(gf=True, active=True)
     
     def search(self, query):
         lookups = (Q(title__icontains=query) |
@@ -79,8 +94,8 @@ class ProductManager(models.Manager):
     def vegetarian(self):
         return self.get_queryset().vegetarian()
         
-    def gluten_free(self):
-        return self.get_queryset().gluten_free()
+    def gf(self):
+        return self.get_queryset().gf()
     
     def get_by_id(self, id):
         qs = self.get_queryset().filter(id=id)
@@ -92,21 +107,31 @@ class ProductManager(models.Manager):
         return self.get_queryset().active().search(query)
         
 class Product(models.Model):
-    category = models.CharField(max_length=256, choices=CATEGORIES)
-    sub_category = models.CharField(max_length=120, default='---', choices=SUBCATEGORIES)
+    
+    #All
+    category = models.CharField(max_length=256, choices=CATEGORY)
     title = models.CharField(max_length=120, default='')
     description = models.TextField()
     price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
     location = models.ManyToManyField(Location)
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
+    #image_exists = models.BooleanField(default=False)
     slug = models.SlugField(blank=True, unique=True)
     active = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
-    #image = models.BooleanField(default=False)
-    gluten_free = models.BooleanField(default=False)
-    vegetarian = models.BooleanField(default=False)
-    alt_vegetarian = models.BooleanField(default=False)
+    gf = models.BooleanField(default=False)
+    v = models.BooleanField(default=False)
+    alt_v = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add = True)
+    
+    #Food
+    course = models.CharField(max_length=256, choices=CATEGORY, default='')
+    diet = models.CharField(max_length=256, choices=DIET, default='')
+    
+    #Drink
+    beverage_type = models.CharField(max_length=256, choices=BEVERAGE_TYPE, default='')
+    alcohol_type = models.CharField(max_length=256, choices=ALCOHOL_TYPE, default='')
+    serving_type = models.CharField(max_length=256, choices=SERVING_TYPE, default='')
     
     filter_horizontal = ('my_m2m_field',)
 
@@ -117,10 +142,7 @@ class Product(models.Model):
     
     def get_absolute_url(self):
         return reverse("products:detail", kwargs={"slug": self.slug})
-    
-    # def __unicode__(self):
-    #     return self.title #python 2
-    
+
     def __str__(self):
         return self.title
     

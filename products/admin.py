@@ -7,8 +7,7 @@ from django.contrib.admin import widgets
 # Qs: How have access to obj? Why vars in quotes. Why location defined afterwards?
 
 class ProductAdmin(admin.ModelAdmin):
-
-    list_display = ['__str__','price','locations','slug','category','active','featured','gluten_free','vegetarian','alt_vegetarian']
+    list_display = ['__str__','price','locations','slug','category','active','featured','gf','v','alt_v']
     
     class Meta:
         model = Product
