@@ -28,6 +28,7 @@ COURSE = [
     ('dessert', 'Dessert'),
 ]
 DIET = [
+    ('none','------'),
     ('vegetarian', 'Vegetarian'),
     ('gluten_free', 'Gluten Free'),
 ]
@@ -111,6 +112,17 @@ class Product(models.Model):
     #All
     category = models.CharField(max_length=256, choices=CATEGORY)
     title = models.CharField(max_length=120, default='')
+    
+    course = models.CharField(max_length=256, choices=COURSE, default='')
+    diet = models.CharField(max_length=256, choices=DIET, default='')
+    gf = models.BooleanField(default=False)
+    v = models.BooleanField(default=False)
+    alt_v = models.BooleanField(default=False)
+    
+    beverage_type = models.CharField(max_length=256, choices=BEVERAGE_TYPE, default='')
+    alcohol_type = models.CharField(max_length=256, choices=ALCOHOL_TYPE, default='')
+    serving_type = models.CharField(max_length=256, choices=SERVING_TYPE, default='')
+    
     description = models.TextField()
     price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
     location = models.ManyToManyField(Location)
@@ -119,26 +131,20 @@ class Product(models.Model):
     slug = models.SlugField(blank=True, unique=True)
     active = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
-    gf = models.BooleanField(default=False)
-    v = models.BooleanField(default=False)
-    alt_v = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add = True)
-    
-    #Food
-    course = models.CharField(max_length=256, choices=CATEGORY, default='')
-    diet = models.CharField(max_length=256, choices=DIET, default='')
-    
-    #Drink
-    beverage_type = models.CharField(max_length=256, choices=BEVERAGE_TYPE, default='')
-    alcohol_type = models.CharField(max_length=256, choices=ALCOHOL_TYPE, default='')
-    serving_type = models.CharField(max_length=256, choices=SERVING_TYPE, default='')
-    
+
     filter_horizontal = ('my_m2m_field',)
 
     objects = ProductManager()
     
     def locations(self):
         return ",\n".join([str(item) for item in self.location.all()])
+
+    def stand_location(self):
+        return ",\n".join([item.stand_locations() for item in self.location.all()])
+    
+    def stand_locations(self):
+        return ",\n".join([item.stand_locations() for item in self.location.all()])
     
     def get_absolute_url(self):
         return reverse("products:detail", kwargs={"slug": self.slug})

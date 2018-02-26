@@ -6,6 +6,7 @@
         <h3>{{ object.title  }}</h3>
         {{ object.description|linebreaks }} <br/>
         {{ object.price }} <br/>
+        <h6 class="card-text">{{ object.locations }}, {{ object.stand_locations }}</h6>
         {% if object.image %}
             <img src='{{ object.image.url }}' class='img-fluid' />
         {% endif %}

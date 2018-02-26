@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import ListView
 from products.models import Product
+from locations.models import Location
 
 from django.shortcuts import render
 #from .filters import UserFilter
@@ -15,6 +16,7 @@ class SearchProductView(ListView):
     template_name = "search/view.html"
     
     def get_queryset(self, *args, **kwargs):
+        
         request = self.request
         
         query = request.GET.get('q')
@@ -25,8 +27,6 @@ class SearchProductView(ListView):
         alcohol_type = request.GET.getlist('alcohol_type')
         serving_type = request.GET.getlist('serving_type')
         
-        #vegetarian = request.GET.get('vegetarian')
-        #gluten_free = request.GET.get('gf')
         print(category)
         print(course)
 
@@ -46,7 +46,7 @@ class SearchProductView(ListView):
             )
 
         #result = result.filter(Q(course__icontains=course))
-        if category != 'all' and category != 'All':
+        if category != 'all' and category != 'All' and category:
             result = result.filter(Q(category__icontains=category))
             
         if course:

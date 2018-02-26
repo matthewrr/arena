@@ -7,8 +7,15 @@
   {% endif %}
   
   <div class="card-body">
-    <h4 class="card-title">{{ instance.title }}</h4>
+    <h5 class="card-title">{{ instance.title }}</h5>
     <p class="card-text">{{ instance.description|truncatewords:12 }}</p>
-    <a href="{{ instance.get_absolute_url }}" class="btn btn-primary">View</a>
   </div>
+  
+  <div class="card-footer">  
+      <div class="card-block">
+          <h4 class="card-text pull-left">${{instance.price}}</h4>
+          <a href="{{ instance.get_absolute_url }}" class="btn btn-primary pull-right align-right rightalign">View</a>
+      </div>
+  </div>
+  
 </div>

@@ -12,3 +12,6 @@ class Location(models.Model):
     
     def __str__(self):
         return self.stand_name
+    
+    def stand_locations(self):
+        return self.stand_location
