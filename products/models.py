@@ -18,6 +18,10 @@ from locations.models import Location
 
 from arena.utils import unique_slug_generator
 
+from multiselectfield import MultiSelectField
+
+from model_utils.managers import InheritanceManager
+
 CATEGORY = [
     ('food', 'Food'),
     ('beverage','Beverage'),
@@ -28,9 +32,8 @@ COURSE = [
     ('dessert', 'Dessert'),
 ]
 DIET = [
-    ('none','------'),
-    ('vegetarian', 'Vegetarian'),
-    ('gluten_free', 'Gluten Free'),
+    ('gf','gf'),
+    ('v', 'v'),
 ]
 BEVERAGE_TYPE = [
     ('alcohol', 'Alcohol'),
@@ -106,23 +109,13 @@ class ProductManager(models.Manager):
         
     def search(self, query):
         return self.get_queryset().active().search(query)
-        
+
 class Product(models.Model):
     
     #All
     category = models.CharField(max_length=256, choices=CATEGORY)
     title = models.CharField(max_length=120, default='')
-    
-    course = models.CharField(max_length=256, choices=COURSE, default='')
-    diet = models.CharField(max_length=256, choices=DIET, default='')
-    gf = models.BooleanField(default=False)
-    v = models.BooleanField(default=False)
-    alt_v = models.BooleanField(default=False)
-    
-    beverage_type = models.CharField(max_length=256, choices=BEVERAGE_TYPE, default='')
-    alcohol_type = models.CharField(max_length=256, choices=ALCOHOL_TYPE, default='')
-    serving_type = models.CharField(max_length=256, choices=SERVING_TYPE, default='')
-    
+
     description = models.TextField()
     price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
     location = models.ManyToManyField(Location)
@@ -135,7 +128,8 @@ class Product(models.Model):
 
     filter_horizontal = ('my_m2m_field',)
 
-    objects = ProductManager()
+    #objects = ProductManager()
+    objects = InheritanceManager()
     
     def locations(self):
         return ",\n".join([str(item) for item in self.location.all()])
@@ -155,7 +149,27 @@ class Product(models.Model):
     @property
     def name(self):
         return self.title
+    
+    #class Meta:
+    #    abstract = True
 
+class Food(Product):
+    course = models.CharField(max_length=256, choices=COURSE, default='')
+    gluten_free = models.BooleanField(default=False)
+    gluten_free_optional = models.BooleanField(default=False)
+    vegetarian = models.BooleanField(default=False)
+    vegetarian_optional = models.BooleanField(default=False)
+    best_diet = MultiSelectField(choices=DIET)
+    
+class Beverage(Product):
+    company = models.CharField(max_length=256, default='')
+    company_location = models.CharField(max_length=256, default='')
+    beverage_type = models.CharField(max_length=256, choices=BEVERAGE_TYPE, default='')
+    alcohol_type = models.CharField(max_length=256, choices=ALCOHOL_TYPE, default='')
+    abv = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
+    ibu = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
+    serving_type = models.CharField(max_length=256, choices=SERVING_TYPE, default='')
+    
 def product_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)

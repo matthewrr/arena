@@ -37,7 +37,8 @@ def product_list_view(request):
 # Detail Views (Class & FBV) + Slug Detail View
 
 class ProductDetailSlugView(DetailView):
-    queryset = Product.objects.all()
+    #queryset = Product.objects.all()
+    queryset = Product.objects.select_subclasses()
     template_name = "products/detail.html"
     
     def get_object(self, *args, **kwargs):
