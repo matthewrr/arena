@@ -51,6 +51,6 @@ class BeverageAdmin(admin.ModelAdmin):
         )
         return super(BeverageAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
-#admin.site.register(Product, ProductAdmin)
+admin.site.register(Product, ProductAdmin)
 admin.site.register(Food, FoodAdmin)
 admin.site.register(Beverage, BeverageAdmin)

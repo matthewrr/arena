@@ -19,6 +19,7 @@ from locations.models import Location
 from arena.utils import unique_slug_generator
 
 from multiselectfield import MultiSelectField
+from model_utils.managers import QueryManager
 
 from model_utils.managers import InheritanceManager
 
@@ -32,8 +33,10 @@ COURSE = [
     ('dessert', 'Dessert'),
 ]
 DIET = [
-    ('gf','gf'),
-    ('v', 'v'),
+    ('vegetarian', 'Vegetarian'),
+    ('vegetarian_option', 'Vegetarian Option'),
+    ('gluten_free','Gluten-Free'),
+    ('gluten_free_option', 'Gluten-Free Option'),
 ]
 BEVERAGE_TYPE = [
     ('alcohol', 'Alcohol'),
@@ -65,17 +68,15 @@ def upload_image_path(instance, filename):
         )
 
 class ProductQuerySet(models.query.QuerySet):
+    
     def active(self):
-        return self.filter(active=True)
+        return self.filter(active=True).select_subclasses()
+    
+    def course(self):
+        return self.filter(course='appetizer').select_subclasses()
     
     def featured(self):
-        return self.filter(featured=True, active=True)
-    
-    def vegetarian(self):
-        return self.filter(v=True, active=True)
-        
-    def gf(self):
-        return self.filter(gf=True, active=True)
+        return self.filter(featured=True, active=True).select_subclasses()
     
     def search(self, query):
         lookups = (Q(title__icontains=query) |
@@ -83,23 +84,21 @@ class ProductQuerySet(models.query.QuerySet):
                    Q(price__icontains=query) |
                    Q(tag__title__icontains=query)
                    )
-        return self.filter(lookups).distinct()
+        return self.filter(lookups).select_subclasses()#distinct()
 
 class ProductManager(models.Manager):
+    
     def get_queryset(self):
         return ProductQuerySet(self.model, using=self._db)
+    
+    def course(self):
+        return self.get_queryset().course()
     
     def all(self):
         return self.get_queryset().active()
 
     def featured(self):
         return self.get_queryset().featured()
-    
-    def vegetarian(self):
-        return self.get_queryset().vegetarian()
-        
-    def gf(self):
-        return self.get_queryset().gf()
     
     def get_by_id(self, id):
         qs = self.get_queryset().filter(id=id)
@@ -111,11 +110,9 @@ class ProductManager(models.Manager):
         return self.get_queryset().active().search(query)
 
 class Product(models.Model):
-    
-    #All
+
     category = models.CharField(max_length=256, choices=CATEGORY)
     title = models.CharField(max_length=120, default='')
-
     description = models.TextField()
     price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
     location = models.ManyToManyField(Location)
@@ -127,10 +124,8 @@ class Product(models.Model):
     timestamp = models.DateTimeField(auto_now_add = True)
 
     filter_horizontal = ('my_m2m_field',)
-
-    #objects = ProductManager()
     objects = InheritanceManager()
-    
+
     def locations(self):
         return ",\n".join([str(item) for item in self.location.all()])
 
@@ -149,17 +144,10 @@ class Product(models.Model):
     @property
     def name(self):
         return self.title
-    
-    #class Meta:
-    #    abstract = True
 
 class Food(Product):
     course = models.CharField(max_length=256, choices=COURSE, default='')
-    gluten_free = models.BooleanField(default=False)
-    gluten_free_optional = models.BooleanField(default=False)
-    vegetarian = models.BooleanField(default=False)
-    vegetarian_optional = models.BooleanField(default=False)
-    best_diet = MultiSelectField(choices=DIET)
+    diet = MultiSelectField(choices=DIET) #why pull choices name
     
 class Beverage(Product):
     company = models.CharField(max_length=256, default='')
