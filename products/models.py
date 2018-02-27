@@ -11,8 +11,6 @@ from django.contrib.admin import widgets
 from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator
 
-#import django_filters
-
 from arena.utils import unique_slug_generator
 from locations.models import Location
 
@@ -48,6 +46,31 @@ SERVING_TYPE = [
     ('can_bottle', 'Can/Bottle'),
 ]
 
+BEER_TYPE = [
+    ('ale', 'Ale'),
+    ('lager', 'Lager'),
+    ('malt', 'Malt'),
+    ('stout_porter', 'Stouts & Porters'),
+]
+
+BEER_STYLE = [
+    ('amber', 'Amber'),
+    ('pale', 'Pale'),
+    ('blonde', 'Blonde'),
+    ('brown', 'Brown'),
+    ('ipa', 'IPA'),
+    ('red', 'Red'),
+    ('wheat', 'Wheat'),
+    ('pilsner','Pilsner'),
+]
+
+BREWERY_TYPE = [
+    ('domestic', 'Domestic'),
+    ('import', 'Import'),
+    ('micro', 'Micro'),
+    ('craft', 'Craft'),
+]
+
 def get_filename_ext(filename):
     base_name = os.path.basename(filename)
     name, ext = os.path.splitext(base_name)
@@ -66,7 +89,6 @@ def upload_image_path(instance, filename):
 class ProductQuerySet(models.query.QuerySet):
     
     def active(self):
-        return "Hello"
         return self.filter(active=True).select_subclasses()
     
     def course(self):
@@ -81,13 +103,11 @@ class ProductQuerySet(models.query.QuerySet):
                    Q(price__icontains=query) |
                    Q(tag__title__icontains=query)
                    )
-        return "Hello"
         return self.filter(lookups).select_subclasses()#distinct()
 
 class ProductManager(models.Manager):
     
     def get_queryset(self):
-        return "Hello"
         return ProductQuerySet(self.model, using=self._db)
     
     def course(self):
@@ -107,12 +127,10 @@ class ProductManager(models.Manager):
         return None
         
     def search(self, query):
-        return "hello"
-        #return self.get_queryset().active().search(query)
+        return self.get_queryset().active().search(query)
 
 class Product(models.Model):
 
-    #category = models.CharField(max_length=256, choices=CATEGORY)
     title = models.CharField(max_length=120, default='')
     description = models.TextField()
     price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
@@ -155,7 +173,10 @@ class Beverage(Product):
     company_location = models.CharField(max_length=256, default='')
     beverage_type = models.CharField(max_length=256, choices=BEVERAGE_TYPE, default='')
     alcohol_type = models.CharField(max_length=256, choices=ALCOHOL_TYPE, default='')
-    serving_type = models.CharField(max_length=256, choices=SERVING_TYPE, default='')
+    beer_type = models.CharField(max_length=256, choices=BEER_TYPE, blank=True)
+    beer_style = models.CharField(max_length=256, choices=BEER_STYLE, blank=True)
+    brewery_type = models.CharField(max_length=256, choices=BREWERY_TYPE, blank=True)
+    serving_type = models.CharField(max_length=256, choices=SERVING_TYPE, blank=True)
     abv = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
     ibu = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
  

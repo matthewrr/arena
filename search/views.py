@@ -73,15 +73,15 @@ class SearchProductView(ListView):
         
         if category == 'beverage' or category == 'all':
             if beverage_type:
-                food = food.filter(
+                beverage = beverage.filter(
                     reduce(operator.or_, (Q(beverage_type__icontains=q) for q in beverage_type))
                 )
             if alcohol_type:
-                food = food.filter(
+                beverage = beverage.filter(
                     reduce(operator.or_, (Q(alcohol_type__icontains=q) for q in alcohol_type))
                 )
             if serving_type:
-                food = food.filter(
+                beverage = beverage.filter(
                     reduce(operator.or_, (Q(serving_type__icontains=q) for q in serving_type))
                 )
         
