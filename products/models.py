@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import random
 import os
+
 from django import forms #combine elsewhere?
 from django.db import models
 from django.db.models import Q
@@ -10,18 +11,13 @@ from django.contrib.admin import widgets
 from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator
 
-from django import forms
-from django.contrib.auth.models import User, Group
-import django_filters
-
-from locations.models import Location
+#import django_filters
 
 from arena.utils import unique_slug_generator
-
-from multiselectfield import MultiSelectField
-from model_utils.managers import QueryManager
+from locations.models import Location
 
 from model_utils.managers import InheritanceManager
+from multiselectfield import MultiSelectField
 
 CATEGORY = [
     ('food', 'Food'),
