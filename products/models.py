@@ -66,6 +66,7 @@ def upload_image_path(instance, filename):
 class ProductQuerySet(models.query.QuerySet):
     
     def active(self):
+        return "Hello"
         return self.filter(active=True).select_subclasses()
     
     def course(self):
@@ -80,18 +81,21 @@ class ProductQuerySet(models.query.QuerySet):
                    Q(price__icontains=query) |
                    Q(tag__title__icontains=query)
                    )
+        return "Hello"
         return self.filter(lookups).select_subclasses()#distinct()
 
 class ProductManager(models.Manager):
     
     def get_queryset(self):
+        return "Hello"
         return ProductQuerySet(self.model, using=self._db)
     
     def course(self):
         return self.get_queryset().course()
     
     def all(self):
-        return self.get_queryset().active()
+        return "hello"
+        #return self.get_queryset().all()
 
     def featured(self):
         return self.get_queryset().featured()
@@ -103,7 +107,8 @@ class ProductManager(models.Manager):
         return None
         
     def search(self, query):
-        return self.get_queryset().active().search(query)
+        return "hello"
+        #return self.get_queryset().active().search(query)
 
 class Product(models.Model):
 

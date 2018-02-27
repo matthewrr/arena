@@ -21,15 +21,38 @@
   </div>
   
   <div class='row'>
-    {% for obj in object_list %}
-      <div class='col'>
-        {% include 'products/snippets/card.html' with instance=obj %}
-        {% if forloop.counter|divisibleby:2 %}
-          </div></div><div class='row'><div class='col-12'><hr /></div>
-        {% else %}
-          </div>
-        {% endif %}
-    {% endfor %}
+    {% include 'search/snippets/food_view.html' %}
   </div>
+  <a>Hey! I'm a divider!!</a>
+  <div class='row'>
+    {% include 'search/snippets/beverage_view.html' %}
+  </div>
+  
+
+  <!--<div class='row'>-->
+  <!--  {% for obj_class in object_list %}-->
+  <!--    {% if forloop.first %}     -->
+  <!--      {% for obj in obj_class %}-->
+  <!--        <div class='col'>-->
+  <!--          {% include 'products/snippets/food_card.html' with instance=obj %}-->
+  <!--          {% if forloop.counter|divisibleby:2 %}-->
+  <!--            </div></div><div class='row'><div class='col-12'><hr /></div>-->
+  <!--          {% else %}-->
+  <!--            </div>-->
+  <!--          {% endif %}-->
+  <!--      {% endfor %} -->
+  <!--    {% else %}-->
+  <!--      {% for obj in obj_class %}-->
+  <!--        <div class='col'>-->
+  <!--          {% include 'products/snippets/beverage_card.html' with instance=obj %}-->
+  <!--          {% if forloop.counter|divisibleby:2 %}-->
+  <!--            </div></div><div class='row'><div class='col-12'><hr /></div>-->
+  <!--          {% else %}-->
+  <!--            </div>-->
+  <!--          {% endif %}-->
+  <!--      {% endfor %}       -->
+  <!--    {% endif %}-->
+  <!--  {% endfor %}-->
+  <!--</div>-->
   
 {% endblock %}

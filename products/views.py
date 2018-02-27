@@ -1,7 +1,5 @@
 from __future__ import unicode_literals
 
-# Create your views here.
-
 from django.http import Http404
 from django.views.generic import ListView, DetailView
 from django.shortcuts import render, get_object_or_404
@@ -9,7 +7,6 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, Food, Beverage
 from locations.models import Location
 from model_utils.managers import InheritanceManager
-#from model_utils.managers import InheritanceManager
 
 # Featured List/Detail Views
 
@@ -21,22 +18,22 @@ class ProductFeaturedListView(ListView):
         return Product.objects.all().featured()
 
 # List Views (Class & FBV)
-
 class ProductListView(ListView):
     template_name = "products/list.html"
     def get_queryset(self, *args, **kwargs):
         request = self.request
-        return Product.objects.select_subclasses()#all()
+        return Food.objects.all()
+        #return Product.objects.select_subclasses(Food)#all()
 
 def product_list_view(request):
-    queryset = Product.objects.select_subclasses()#all()
+    queryset = Product.objects.select_subclasses(Food)#all()
     context = {
         'object_list': queryset
     }
-    return render(request, "products/list.html", context)
+    return Food.objects.all()
+    #return render(request, "products/list.html", context)
 
 # Detail Views (Class & FBV) + Slug Detail View
-
 class ProductDetailSlugView(DetailView):
     #queryset = Product.objects.all()
     queryset = Product.objects.select_subclasses()

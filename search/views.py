@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 
 from functools import reduce
+from itertools import chain
 import operator
 
 from products.models import Product, Beverage, Food
@@ -34,6 +35,12 @@ class SearchProductView(ListView):
         
         beverage = Beverage.objects.all()
         food = Food.objects.all()
+        
+        for b in beverage:
+            print(b.__class__.__name__)
+        
+        for f in food:
+            print(f.__class__.__name__)
         
         if query:
             query_list = query.split(' ')
@@ -77,6 +84,12 @@ class SearchProductView(ListView):
                 food = food.filter(
                     reduce(operator.or_, (Q(serving_type__icontains=q) for q in serving_type))
                 )
-            
-        #return (food, beverage)
-        return food
+        
+        #result_list = chain(food, beverage)
+        
+        if category == 'beverage':
+            food = None
+        if category == 'food':
+            beverage = None
+        
+        return (food, beverage)
