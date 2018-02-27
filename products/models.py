@@ -143,19 +143,20 @@ class Product(models.Model):
 
 class Food(Product):
     course = models.CharField(max_length=256, choices=COURSE, default='')
-    diet = MultiSelectField(choices=DIET) #why pull choices name
+    diet = MultiSelectField(choices=DIET, blank=True) #why pull choices name
     
 class Beverage(Product):
     company = models.CharField(max_length=256, default='')
     company_location = models.CharField(max_length=256, default='')
     beverage_type = models.CharField(max_length=256, choices=BEVERAGE_TYPE, default='')
     alcohol_type = models.CharField(max_length=256, choices=ALCOHOL_TYPE, default='')
+    serving_type = models.CharField(max_length=256, choices=SERVING_TYPE, default='')
     abv = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
     ibu = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
-    serving_type = models.CharField(max_length=256, choices=SERVING_TYPE, default='')
-    
+ 
 def product_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)
 
-pre_save.connect(product_pre_save_receiver, sender=Product)
+pre_save.connect(product_pre_save_receiver, sender=Food)
+pre_save.connect(product_pre_save_receiver, sender=Beverage)
