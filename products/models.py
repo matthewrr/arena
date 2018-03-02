@@ -50,7 +50,6 @@ BEER_TYPE = [
     ('ale', 'Ale'),
     ('lager', 'Lager'),
     ('malt', 'Malt'),
-    ('stout_porter', 'Stouts & Porters'),
 ]
 
 BEER_STYLE = [
@@ -62,6 +61,8 @@ BEER_STYLE = [
     ('red', 'Red'),
     ('wheat', 'Wheat'),
     ('pilsner','Pilsner'),
+    ('stout', 'Stout'),
+    ('pilsner', 'Pilsner'),
 ]
 
 BREWERY_TYPE = [
@@ -177,8 +178,9 @@ class Beverage(Product):
     beer_style = models.CharField(max_length=256, choices=BEER_STYLE, blank=True)
     brewery_type = models.CharField(max_length=256, choices=BREWERY_TYPE, blank=True)
     serving_type = models.CharField(max_length=256, choices=SERVING_TYPE, blank=True)
-    abv = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
-    ibu = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
+    serving_size = models.DecimalField(decimal_places=1,max_digits=3,validators=[MinValueValidator(0)],default=0)
+    abv = models.DecimalField(decimal_places=1,max_digits=3,validators=[MinValueValidator(0)],default=0)
+    ibu = models.DecimalField(decimal_places=0,max_digits=3,validators=[MinValueValidator(0)],default=0)
  
 def product_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
