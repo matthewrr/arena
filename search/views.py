@@ -13,7 +13,6 @@ from products.models import Product, Beverage, Food
 #title, description, price, location, image, slug, active, featured
 #beverage: comapny, company_location,beverage_type, alcohol_type, serving_type abv, ibu
 #food: course, dietary_restrictions
-
 class SearchProductView(ListView):
     template_name = "search/view.html"
     
@@ -49,16 +48,16 @@ class SearchProductView(ListView):
                     reduce(operator.and_,
                            (Q(title__icontains=q) for q in query_list)) |
                     reduce(operator.and_,
-                           (Q(description__icontains=q) for q in query_list)) |
-                    reduce(operator.and_,
-                           (Q(company__icontains=q) for q in query_list))
+                           (Q(description__icontains=q) for q in query_list))
                 )
             if category == 'beverage' or category == 'all':
                 beverage = beverage.filter(
                     reduce(operator.and_,
                            (Q(title__icontains=q) for q in query_list)) |
                     reduce(operator.and_,
-                           (Q(description__icontains=q) for q in query_list))
+                           (Q(description__icontains=q) for q in query_list)) |
+                    reduce(operator.and_,
+                           (Q(company__icontains=q) for q in query_list))
                 )
         
         if category == 'food' or category == 'all': 

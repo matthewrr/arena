@@ -52,6 +52,12 @@ BEER_TYPE = [
     ('malt', 'Malt'),
 ]
 
+WINE_TYPE = [
+    ('white', 'White'),
+    ('red', 'Red'),
+    ('sparkling', 'Sparkling'),
+]
+
 BEER_STYLE = [
     ('amber', 'Amber'),
     ('pale', 'Pale'),
@@ -60,9 +66,9 @@ BEER_STYLE = [
     ('ipa', 'IPA'),
     ('red', 'Red'),
     ('wheat', 'Wheat'),
-    ('pilsner','Pilsner'),
     ('stout', 'Stout'),
     ('pilsner', 'Pilsner'),
+    ('light', 'Light'),
 ]
 
 BREWERY_TYPE = [
@@ -174,10 +180,11 @@ class Beverage(Product):
     company_location = models.CharField(max_length=256, default='')
     beverage_type = models.CharField(max_length=256, choices=BEVERAGE_TYPE, default='')
     alcohol_type = models.CharField(max_length=256, choices=ALCOHOL_TYPE, default='')
+    wine_type = models.CharField(max_length=256, choices=WINE_TYPE, blank=True)
     beer_type = models.CharField(max_length=256, choices=BEER_TYPE, blank=True)
     beer_style = models.CharField(max_length=256, choices=BEER_STYLE, blank=True)
     brewery_type = models.CharField(max_length=256, choices=BREWERY_TYPE, blank=True)
-    serving_type = models.CharField(max_length=256, choices=SERVING_TYPE, blank=True)
+    serving_type = models.CharField(max_length=256, choices=SERVING_TYPE)
     serving_size = models.DecimalField(decimal_places=1,max_digits=3,validators=[MinValueValidator(0)],default=0)
     abv = models.DecimalField(decimal_places=1,max_digits=3,validators=[MinValueValidator(0)],default=0)
     ibu = models.DecimalField(decimal_places=0,max_digits=3,validators=[MinValueValidator(0)],default=0)

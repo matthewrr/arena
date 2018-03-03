@@ -19,16 +19,46 @@
       </div>
     {% endif %}
   </div>
-  
-  <div class='row'>
-    <h3>I'm the food divider!</h3>
+
+<div class='container container-fluid bg-light rounded p-2'>
+  <div class="dropdown">
+    Sort By:
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Best Match
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <button class="dropdown-item" type="button">Price (Low-High)</button>
+      <button class="dropdown-item" type="button">Price (High-Low)</button>
+      <button class="dropdown-item" type="button">Location (Nearest First)</button>
+      <div class="dropdown-divider"></div>
+      <button class="dropdown-item" type="button">Best Match</button>
+    </div>
   </div>
+</div>
+
+
   <div class='row'>
     {% include 'search/snippets/food_view.html' %}
   </div>
-  <div class='row'>
-    <h3>I'm the beverage divider!</h3>
+<div class='container container-fluid bg-light rounded p-2'>
+  <div class="dropdown">
+    Sort By:
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Best Match
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <button class="dropdown-item" type="button">Price (Low-High)</button>
+      <button class="dropdown-item" type="button">Price (High-Low)</button>
+      <button class="dropdown-item" type="button">ABV (Low-High)</button>
+      <button class="dropdown-item" type="button">ABV (High-Low)</button>
+      <button class="dropdown-item" type="button">IBU (Low-High)</button>
+      <button class="dropdown-item" type="button">IBU (High-Low)</button>
+      <button class="dropdown-item" type="button">Location (Nearest First)</button>
+      <div class="dropdown-divider"></div>
+      <button class="dropdown-item" type="button">Best Match</button>
+    </div>
   </div>
+</div>
   <div class='row'>
     {% include 'search/snippets/beverage_view.html' %}
   </div>
