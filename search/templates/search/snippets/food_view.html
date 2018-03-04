@@ -1,13 +1,23 @@
 {% for obj_class in object_list %}
-    {% if forloop.first %}     
+    {% if forloop.first %}
         {% for obj in obj_class %}
-            <div class='col'>
-                {% include 'products/snippets/food_card.html' with instance=obj %}
-                {% if forloop.counter|divisibleby:2 %}
-                  </div></div><div class='row'><div class='col-12'><hr /></div>
-                {% else %}
-                  </div>
-                {% endif %}
+          
+          <div class='col-12 pb-3'>
+            {% include 'products/snippets/food_card.html' with instance=obj %}
+            {% if forloop.counter|divisibleby:2 %}
+              </div> <!-- #end column -->
+              </div> <!-- #end group -->
+               <!-- #end row-->
+              <hr />
+      
+      <div class='row mb-3'>
+
+
+            
+            {% else %}
+              </div> <!-- #end column -->
+            {% endif %}
+            
         {% endfor %} 
     {% endif %}
 {% endfor %}

@@ -1,67 +1,143 @@
-    <p>FOOD</p>
-    <a>Course: </a>
-        <div class="form-check form-check-inline">
-          
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="appetizer" name="course" value="appetizer"> Appetizer
-      </label>
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="entree" name="course" value="entree"> Entree
-      </label>
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="dessert" name="course" value="dessert"> Dessert
-      </label>
-    </div>
+<div class="collapse" id="collapseExample">
+  <div class="card bg-light mb-3">
     
-    <div class="form-check form-check-inline">
-      <a>Dietary Restrictions: </a>
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="vegetarian" name="diet" value="vegetarian"> Vegetarian
-      </label>
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="gluten_free" name="diet" value="gluten_free"> Gluten-Free
-      </label>
-    </div>
-    
-  <p>DRINK</p>
-    
+    <div class="card-header pt-2 pb-1">
 
-    
-    <div class="form-check form-check-inline">
-      
-      <a>Category: </a>
-      
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="alcohol" name="beverage_type" value="alcohol"> Alcohol
-      </label>
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="non_alcohol" name="beverage_type" value="non_alcohol"> Non-Alcohol
-      </label>
+            <label class="form-check-label pl-0" style="vertical-align:top;">
+              <input class="with-gap" type="checkbox" id="appetizer" name="course" value="appetizer"> <a class='h6 mb-0'>Food</a>
+            </label>
     </div>
     
-    <div class="form-check form-check-inline">
-      
-      <a>Type (If Alcohol): </a>
-      
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="beer" name="alcohol_type" value="beer"> Beer
-      </label>
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="wine_cider" name="alcohol_type" value="wine_cider"> Wine & Cider
-      </label>
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="hard_alcohol" name="alcohol_type" value="hard_alcohol"> Hard Alcohol
-      </label>
-    </div>
+    <div class="card-body pt-2 pb-2">
+      <div class="form-check form-check-inline col-12 pl-0 pr-0 mb-0">
+        <div class="row pb-1">
+          
+          <div class='col-auto'>
+            <a class="h6 mb-0">Course:</a>
+          </div>
+          
+          <div class="col-auto p-0">
+            <label class="form-check-label pl-0" style="vertical-align:top;">
+              <input class="with-gap" type="checkbox" id="appetizer" name="course" value="appetizer"> App
+            </label>
+          </div>
+          <div class="col-auto pr-0 pl-3">
+            <label class="form-check-label pl-0" style="vertical-align:top;">
+              <input class="with-gap" type="checkbox" id="appetizer" name="course" value="appetizer"> Main
+            </label>
+          </div>
+          <div class="col-auto pr-0 pl-3">
+            <label class="form-check-label pl-0" style="vertical-align:top;">
+              <input class="with-gap" type="checkbox" id="appetizer" name="course" value="appetizer"> Dessert
+            </label>
+          </div>
+          
+        </div>
+        <hr/ style="margin: 0;">
+
+        <div class="form-check form-check-inline mb-0 pt-1">
+          <div class="row">
+            
+            <div class='col-auto'>
+              <a class="h6 mb-0">Diet:</a>
+            </div>
+
+            <div class="col-auto p-0">
+              <label class="form-check-label pl-0" style="vertical-align:top;">
+                <input class="with-gap" type="checkbox" id="vegetarian" name="diet" value="vegetarian"> Vegetarian
+              </label>
+            </div>
+            <div class="col-auto p-0">
+              <label class="form-check-label" style="vertical-align:top;">
+                <input class="with-gap" type="checkbox" id="gluten_free" name="diet" value="gluten_free"> Gluten-Free
+              </label>
+            </div>
+            
+          </div>
+        </div>
     
-    <div class="form-check form-check-inline">
-      
-      <a>Serving: </a>
-      
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="cup" name="serving_type" value="cup"> Cup
-      </label>
-      <label class="form-check-label">
-        <input class="with-gap" type="checkbox" id="can_bottle" name="serving_type" value="can_bottle"> Can / Bottle
-      </label>
     </div>
+  </div>
+</div>
+
+  <div class="card bg-light mb-3">
+    
+    <div class="card-header pt-2 pb-1">
+
+            <label class="form-check-label pl-0" style="vertical-align:top;">
+              <input class="with-gap" type="checkbox" id="appetizer" name="course" value="appetizer"> <a class='h6 mb-0'>Drink</a>
+            </label>
+    </div>
+    <div class="card-body pt-2 pb-2">
+      <div class="form-check form-check-inline col-12 pl-0 pr-0 mb-0">
+        <div class="row pb-1">
+          
+          <div class='col-auto'>
+            <a class="h6 mb-0">Category:</a>
+          </div>
+          
+          <div class="col-auto p-0">
+            <label class="form-check-label pl-0" style="vertical-align:top;">
+              <input class="with-gap" type="checkbox" id="alcohol" name="beverage_type" value="alcohol"> Alcohol
+            </label>
+          </div>
+          <div class="col-auto pr-0 pl-3">
+            <label class="form-check-label pl-0" style="vertical-align:top;">
+              <input class="with-gap" type="checkbox" id="non_alcohol" name="beverage_type" value="non_alcohol"> Non-Alcohol
+            </label>
+          </div>
+          
+        </div>
+        <hr/ style="margin: 0;">
+
+        <div class="form-check form-check-inline mb-0 pt-1">
+          <div class="row pb-1">
+            
+            <div class='col-auto'>
+              <a class="h6 mb-0">Type:</a>
+            </div>
+
+            <div class="col-auto p-0">
+              <label class="form-check-label pl-0" style="vertical-align:top;">
+                <input class="with-gap" type="checkbox" id="beer" name="alcohol_type" value="beer"> Beer
+              </label>
+            </div>
+            <div class="col-auto p-0">
+              <label class="form-check-label" style="vertical-align:top;">
+                <input class="with-gap" type="checkbox" id="liquor" name="alcohol_type" value="liquor"> Liquor
+              </label>
+            </div>
+            <div class="col-auto p-0">
+              <label class="form-check-label" style="vertical-align:top;">
+                <input class="with-gap" type="checkbox" id="wine_cider" name="alcohol_type" value="wine_cider"> Other
+              </label>
+            </div>
+            
+          </div>
+        </div>
+        <hr/ style="margin: 0;">
+        
+        <div class="form-check form-check-inline mb-0 pt-1">
+          <div class="row">
+            
+            <div class='col-auto'>
+              <a class="h6 mb-0">Serving:</a>
+            </div>
+
+            <div class="col-auto p-0">
+              <label class="form-check-label pl-0" style="vertical-align:top;">
+                <input class="with-gap" type="checkbox" id="cup" name="serving_type" value="cup"> Cup
+              </label>
+            </div>
+            <div class="col-auto p-0">
+              <label class="form-check-label" style="vertical-align:top;">
+                <input class="with-gap" type="checkbox" id="can_bottle" name="serving_type" value="can_bottle"> Can / Bottle
+              </label>
+            </div>
+            
+          </div>
+        </div>
+    
+    </div>
+  </div>
+</div>

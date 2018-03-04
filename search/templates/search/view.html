@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block content %}
 
   <div class='row mb-3'>  
@@ -8,10 +9,10 @@
         <hr />
       </div>
     {% else %}
-      <div class='col-12 col-md-6 mx-auto py-5'>
+      <div class='col-12 col-md-6 mx-auto pt-5 pb-0'>
           <form method='GET' action='{% url "search:query" %}' class="form my-2 my-lg-0">
             {% include 'search/snippets/query.html' %}
-            {% include 'search/snippets/checkboxes.html' %}
+            {% include 'search/snippets/toggle.html' %}
           </form>
       </div>
      <div class='col-12'>
@@ -37,7 +38,7 @@
 </div>
 
 
-  <div class='row'>
+  <div class='row mb-3'>
     {% include 'search/snippets/food_view.html' %}
   </div>
 <div class='container container-fluid bg-light rounded p-2'>
