@@ -1,23 +1,42 @@
-{% for obj_class in object_list %}
-    {% if forloop.first %}
-        {% for obj in obj_class %}
-          
-          <div class='col-12 pb-3'>
-            {% include 'products/snippets/food_card.html' with instance=obj %}
-            {% if forloop.counter|divisibleby:2 %}
-              </div> <!-- #end column -->
-              </div> <!-- #end group -->
-               <!-- #end row-->
+<div class='row mb-3 px-3'>
+    {% for obj_class in object_list %}
+        {% if forloop.first %}
+            {% for obj in obj_class %}
+              
+              <div class='col-12 pb-3'>
+                {% include 'products/snippets/food_card.html' with instance=obj %}
+              </div>
               <hr />
-      
-      <div class='row mb-3'>
+            {% endfor %} 
+        {% endif %}
+    {% endfor %}
+</div>
 
+<!--
+<div class='row mb-3 px-3'>
+    {% for obj_class in object_list %}
+        {% if forloop.first %}
+            {% for obj in obj_class %}
+              
+              <div class='col-6 pb-3'>
+                {% include 'products/snippets/food_card.html' with instance=obj %}
+                
+                {% if forloop.counter|divisibleby:2 %}
+                  </div> 
+                  </div>
+                  <hr />
+          
+                  <div class='row mb-3 px-3'>
 
-            
-            {% else %}
-              </div> <!-- #end column -->
-            {% endif %}
-            
-        {% endfor %} 
-    {% endif %}
-{% endfor %}
+    
+    
+                
+                {% else %}
+                  </div> 
+                {% endif %}
+                
+            {% endfor %} 
+        {% endif %}
+    {% endfor %}
+</div>
+-->

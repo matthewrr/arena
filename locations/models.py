@@ -22,3 +22,6 @@ class Location(models.Model):
     
     def stand_locations(self):
         return self.stand_location
+        
+    def stand_names(self):
+        return self.stand_name

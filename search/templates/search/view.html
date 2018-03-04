@@ -9,7 +9,7 @@
         <hr />
       </div>
     {% else %}
-      <div class='col-12 col-md-6 mx-auto pt-5 pb-0'>
+      <div class='col-12 mx-auto pt-5 pb-0'>
           <form method='GET' action='{% url "search:query" %}' class="form my-2 my-lg-0">
             {% include 'search/snippets/query.html' %}
             {% include 'search/snippets/toggle.html' %}
@@ -21,7 +21,7 @@
     {% endif %}
   </div>
 
-<div class='container container-fluid bg-light rounded p-2'>
+<div class='container container-fluid bg-light rounded p-2 mx-3'>
   <div class="dropdown">
     Sort By:
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,10 +38,10 @@
 </div>
 
 
-  <div class='row mb-3'>
+
     {% include 'search/snippets/food_view.html' %}
-  </div>
-<div class='container container-fluid bg-light rounded p-2'>
+
+<div class='container container-fluid bg-light rounded p-2 mx-3'>
   <div class="dropdown">
     Sort By:
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
