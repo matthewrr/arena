@@ -3,9 +3,17 @@
         {% if forloop.first %}
             {% for obj in obj_class %}
               
-              <div class='col-12 pb-3'>
-                {% include 'products/snippets/food_card.html' with instance=obj %}
-              </div>
+              {% if forloop.counter|divisibleby:2 %}
+                <div class='col-6 pb-3 mx-auto pl-1'>
+                  {% include 'products/snippets/food_card.html' with instance=obj %}
+                </div>
+              {% else %}
+                <div class='col-6 pb-3 mx-auto pr-1'>
+                  {% include 'products/snippets/food_card.html' with instance=obj %}
+                </div>
+              {% endif %}
+              
+
               <hr />
             {% endfor %} 
         {% endif %}

@@ -178,6 +178,9 @@ class Food(Product):
     course = models.CharField(max_length=256, choices=COURSE, default='')
     diet = MultiSelectField(choices=DIET, blank=True) #why pull choices name
     
+    def diet_selection(self):
+        return [label for value, label in self.fields['diet'].choices if value in self['diet'].value()]
+    
 class Beverage(Product):
     company = models.CharField(max_length=256, default='')
     company_location = models.CharField(max_length=256, default='')

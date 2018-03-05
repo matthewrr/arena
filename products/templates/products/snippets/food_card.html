@@ -1,32 +1,52 @@
 <div class="card" style="width: 100%;">
-  
   {% if instance.image %}
         <a href="{{ instance.get_absolute_url }}">
           <img class="card-img-top" src="{{ instance.image.url }}" alt="{{ instance.title }} logo">
         </a>
   {% endif %}
   
-  <div class="card-body">
-    <h5 class="card-title">{{ instance.title }}</h5>
-
-    <p class="card-text">{{ instance.description|truncatewords:12 }}</p>
-  
-  <div>
-    {% if instance.stand_name %}
-      <b>Stand Name:</b> {{instance.stand_name}} <br/>
+  <div class="card-body p-2">
+    
+    {% if instance.diet %}
+        {% for item in instance.diet %}
+          {% if item == "vegetarian" %}
+            {{ item }}
+            <a href="{{ instance.get_absolute_url }}">
+              <img src="/static_cdn/static_root/admin/img/products/food/vegetarian-icon.jpg" alt="{{ instance.title }} logo">
+            </a>
+            
+          {% endif %}
+        {% endfor %}
+        
     {% endif %}
-      <b>Located Near:</b> Section {{instance.stand_location}} <br/>
-  </div>
-    <a href="#">See Map</a>
+    
+<!--
+    <select id="id_Customer" name="Customer">
+      {% for x,y in form.fields.Customer.choices %}
+        <option value="{{ x }}"{% if form.fields.Customer.value == x %} selected{% endif %}>{{ y }}</option>
+      {% endfor %}
+    </select>
+-->
+    
+    <h6 class="card-title mb-2" style="font-size: 12px;">{{ instance.title }}</h6>
+
+    <p class="card-text mb-0" style="font-size: 10px;"> {{ instance.description|truncatewords:12 }}</p>
   
+  <div class="pt-1" style="line-height: .8;">
+    {% if instance.stand_name %}
+      <a class="h5" style="font-size: 10px;">Stand Name:</a><a style="font-size: 10px;"> {{instance.stand_name}}</a> </br>
+    {% endif %}
+      <a class="h5" style="font-size: 10px;">Located Near:</a><a style="font-size: 10px;"> Stand {{instance.stand_location}}</a> <br/>
+  
+    <a href="#" style="font-size: 10px;">See Map</a> <br/>
+  </div>
     </div>
     
   
-  <div class="card-footer">  
+  <div class="card-footer" style="padding: .3rem .5rem;">  
       <div class="card-block">
-          <h4 class="card-text pull-left">${{instance.price}}</h4>
-          <a href="{{ instance.get_absolute_url }}" class="btn btn-primary pull-right align-right rightalign">View</a>
+          <span class="align-bottom"><a class="card-text pull-left mb-0">${{instance.price}}</a></span>
+          <a href="{{ instance.get_absolute_url }}" class="btn btn-primary pull-right" style="padding: .3rem .75rem;font-size: .75rem;line-height: 1;border-radius: .2rem;">View</a>
       </div>
   </div>
-  
 </div>

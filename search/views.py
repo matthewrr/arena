@@ -35,11 +35,11 @@ class SearchProductView(ListView):
         beverage = Beverage.objects.all()
         food = Food.objects.all()
         
-        for b in beverage:
-            print(b.__class__.__name__)
+        # for b in beverage:
+        #     print(b.__class__.__name__)
         
-        for f in food:
-            print(f.__class__.__name__)
+        # for f in food:
+        #     print(f.__class__.__name__)
         
         if query:
             query_list = query.split(' ')
@@ -90,5 +90,6 @@ class SearchProductView(ListView):
             food = None
         if category == 'food':
             beverage = None
+        
         
         return (food, beverage)
