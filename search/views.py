@@ -20,7 +20,7 @@ class SearchProductView(ListView):
         
         request = self.request
         query = request.GET.get('q')
-        category = request.GET.get('category')
+        category = request.GET.getlist('category')
         
         course = request.GET.getlist('course')
         dietary_restrictions = request.GET.getlist('diet')
@@ -43,14 +43,14 @@ class SearchProductView(ListView):
         
         if query:
             query_list = query.split(' ')
-            if category == 'food' or category == 'all':
+            if not category or 'food' in category:
                 food = food.filter(
                     reduce(operator.and_,
                            (Q(title__icontains=q) for q in query_list)) |
                     reduce(operator.and_,
                            (Q(description__icontains=q) for q in query_list))
                 )
-            if category == 'beverage' or category == 'all':
+            if not category or 'beverage' in category:
                 beverage = beverage.filter(
                     reduce(operator.and_,
                            (Q(title__icontains=q) for q in query_list)) |
@@ -60,7 +60,7 @@ class SearchProductView(ListView):
                            (Q(company__icontains=q) for q in query_list))
                 )
         
-        if category == 'food' or category == 'all': 
+        if not category or 'food' in category: 
             if course:
                 food = food.filter(
                     reduce(operator.or_, (Q(course__icontains=q) for q in course))
@@ -70,7 +70,7 @@ class SearchProductView(ListView):
                     reduce(operator.and_, (Q(diet__icontains=q) for q in dietary_restrictions))
                 )
         
-        if category == 'beverage' or category == 'all':
+        if not category or 'beverage' in category:
             if beverage_type:
                 beverage = beverage.filter(
                     reduce(operator.or_, (Q(beverage_type__icontains=q) for q in beverage_type))
@@ -85,11 +85,14 @@ class SearchProductView(ListView):
                 )
         
         #result_list = chain(food, beverage)
-        
-        if category == 'beverage':
-            food = None
-        if category == 'food':
+        if category and 'beverage' not in category:
             beverage = None
+        if category and 'food' not in category:
+            food = None
+        # if category == 'beverage':
+        #     food = None
+        # if category == 'food':
+        #     beverage = None
         
         
         return (food, beverage)

@@ -6,17 +6,17 @@
         </a>
   {% endif %}
   
-  <div class="card-body p-2">
+  <div class="card-body p-2" style="border: 1px solid rgba(0,0,0,.125); */border-radius: 0;border-bottom: 0px;">
     
     <h6 class="card-title mb-1" style="font-size: 12px; font-weight: 700;">
       {{ instance.title }}
         {% if instance.diet %}
           {% for item in instance.diet %}
             {% if item == "vegetarian" %}
-              <img style="width: 15px;" src="/media/products/11111/vegetarian-icon.png" alt="vegetarian icon"/>
+              <img class="align-top" style="width: 15px;" src="/media/products/11111/vegetarian-icon.png" alt="vegetarian icon"/>
             {% endif %}
             {% if item == "gluten_free" %}
-              <img style="width: 15px;" src="/media/products/11111/gluten-free-icon.png" alt="gluten-free icon"/>
+              <img class="align-top" style="width: 15px;" src="/media/products/11111/gluten-free-icon.png" alt="gluten-free icon"/>
             {% endif %}
           {% endfor %}
       {% endif %}
@@ -33,12 +33,12 @@
       <a href="#" style="font-size: 10px;">See Map</a> <br/>
   </div>
 -->
-
 <a href="#" style="font-size: 12px; font-weight: 600;">See Location</a> <br/>
+
 </div>  
-  <div class="card-footer" style="padding: .3rem .5rem;">  
+  <div class="card-footer" style="padding: .3rem .5rem; border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);border-bottom: 1px solid rgba(0,0,0,.125);">  
       <div class="card-block">
-          <span class="align-bottom"><a class="card-text pull-left mb-0">${{instance.price}}</a></span>
+          <span><a class="card-text pull-left mb-0">${{instance.price}}</a></span>
           <a href="{{ instance.get_absolute_url }}" class="btn btn-primary pull-right" style="padding: .3rem .75rem;font-size: .75rem;line-height: 1;border-radius: .2rem;">View</a>
       </div>
   </div>
