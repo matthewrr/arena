@@ -52,10 +52,25 @@ BEER_TYPE = [
     ('malt', 'Malt'),
 ]
 
-WINE_TYPE = [
+WINE_CATEGORY = [
     ('white', 'White'),
     ('red', 'Red'),
     ('sparkling', 'Sparkling'),
+]
+
+WINE_TYPE = [
+    ("chardonnay","Chardonnay"),
+    ("sauvignon_blanc","Sauvignon Blanc"),
+    ("pinot_grigio","Pinot Grigio"), #add pinot gris
+    ("riesling","Riesling"),
+    ("merlot","Merlot"),
+    ("red_blend","Red Blend"),
+    ("white_blend","White Blend"),
+    ("zinfandel","Zinfandel"),
+    ("pinot_noir","Pinot Noir"),
+    ("syrah","Syrah"), #add siraz
+    ("cabernet_sauvignon","Cabernet Sauvignon"),
+    
 ]
 
 BEER_STYLE = [
@@ -175,7 +190,7 @@ class Product(models.Model):
         return self.title
 
 class Food(Product):
-    category = models.CharField(max_length=256, default='food')
+    category = models.CharField(max_length=256, default='Food')
     course = models.CharField(max_length=256, choices=COURSE, default='')
     diet = MultiSelectField(choices=DIET, blank=True) #why pull choices name
     
@@ -183,11 +198,12 @@ class Food(Product):
         return [label for value, label in self.fields['diet'].choices if value in self['diet'].value()]
 
 class Beverage(Product):
-    category = models.CharField(max_length=256, default='beverage')
+    category = models.CharField(max_length=256, default='Beverage')
     company = models.CharField(max_length=256, default='')
     company_location = models.CharField(max_length=256, default='')
     beverage_type = models.CharField(max_length=256, choices=BEVERAGE_TYPE, default='')
     alcohol_type = models.CharField(max_length=256, choices=ALCOHOL_TYPE, default='')
+    wine_category = models.CharField(max_length=256, choices=WINE_CATEGORY, blank=True)
     wine_type = models.CharField(max_length=256, choices=WINE_TYPE, blank=True)
     beer_type = models.CharField(max_length=256, choices=BEER_TYPE, blank=True)
     beer_style = models.CharField(max_length=256, choices=BEER_STYLE, blank=True)

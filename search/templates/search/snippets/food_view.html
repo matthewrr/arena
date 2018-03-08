@@ -1,3 +1,5 @@
+
+
 <div class='mb-3'>
     {% for obj_class in object_list %}
         {% if forloop.first %}
@@ -15,7 +17,7 @@
                       <div class="card-group" style="flex-direction: row;">
 
                 {% else %}
-                    <div class="card mr-1" style="border:0;">
+                    <div class="card mr-0" style="border:0;">
                       {% include 'products/snippets/food_card.html' with instance=obj %}
                     </div>
                     
@@ -26,32 +28,3 @@
         {% endif %}
     {% endfor %}
 </div>
-
-<!--
-<div class='row mb-3 px-3'>
-    {% for obj_class in object_list %}
-        {% if forloop.first %}
-            {% for obj in obj_class %}
-              
-              <div class='col-6 pb-3'>
-                {% include 'products/snippets/food_card.html' with instance=obj %}
-                
-                {% if forloop.counter|divisibleby:2 %}
-                  </div> 
-                  </div>
-                  <hr />
-          
-                  <div class='row mb-3 px-3'>
-
-    
-    
-                
-                {% else %}
-                  </div> 
-                {% endif %}
-                
-            {% endfor %} 
-        {% endif %}
-    {% endfor %}
-</div>
--->

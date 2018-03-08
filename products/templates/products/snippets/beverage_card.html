@@ -7,14 +7,44 @@
   {% endif %}
   
   <div class="card-body">
-    <h5 class="card-title">{{ instance.title }}</h5>
-    <p class="card-text">{{ instance.description|truncatewords:12 }}</p>
+    <h5 class="card-title">{{ instance.title }}, {{ instance.serving_size|floatformat }}oz</h5>
+    <p class="card-text">
+      {{ instance.company }} <br />
+      {{ instance.company_location }} <br />
+      {{ instance.description|truncatewords:12 }} <br />
+      
+      {% if instance.alcohol_type == "beer" %}
+          {% if instance.beer_style == "ipa" %}
+            <a style="text-transform:uppercase">{{ instance.beer_style }}</a><br />
+          {% elif instance.beer_style == "stout" %}
+            <a style="text-transform: capitalize">
+              {{ instance.beer_style }}<br />
+            </a>
+          {% else %}
+            <a style="text-transform: capitalize">
+              {{ instance.beer_style }} {{ instance.beer_type }} <br />
+            </a>
+          {% endif %}
+        IBU: {{ instance.ibu }} <br />
+      {% endif %}
+      {% if instance.alcohol_type == "other" %}
+        {{ instance.wine_type }}
+      {% endif %}
+      ABV: {{ instance.abv }}% <br />
+    </p>
+    
+  <a href="#" style="font-size: 12px; font-weight: 600;">
+  <img class="align-baseline" style="width: 10px;" src="/media/products/11111/location-cursor.png" alt="location icon"/> Locate
+</a>
+<br/>
   </div>
   
-  <div class="card-footer">  
+
+  
+  <div class="card-footer" style="padding: .3rem .5rem; border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);border-bottom: 1px solid rgba(0,0,0,.125);">  
       <div class="card-block">
-          <h4 class="card-text pull-left">${{instance.price}}</h4>
-          <a href="{{ instance.get_absolute_url }}" class="btn btn-primary pull-right align-right rightalign">View</a>
+          <span><a class="card-text pull-left mb-0">${{instance.price}}</a></span>
+          <a href="{{ instance.get_absolute_url }}" class="btn btn-primary pull-right" style="padding: .3rem .75rem;font-size: .75rem;line-height: 1;border-radius: .2rem;">View</a>
       </div>
   </div>
   

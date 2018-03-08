@@ -1,13 +1,28 @@
-{% for obj_class in object_list %}
-    {% if forloop.last %}     
-        {% for obj in obj_class %}
-            <div class='card-group'>
-                {% include 'products/snippets/food_card.html' with instance=obj %}
+<div class='mb-3'>
+    {% for obj_class in object_list %}
+        {% if forloop.last %}
+         <div class='col-12 px-0 mx-auto'>
+            <div class="card-group" style="flex-direction: row;">
+              {% for obj in obj_class %}
+                
                 {% if forloop.counter|divisibleby:2 %}
-                  </div></div><div class='row'><div class='col-12'></div>
+                    <div class="card ml-1" style="border:0;">
+                    {% include 'products/snippets/beverage_card.html' with instance=obj %}
+                    </div>
+
+                    </div></div>
+                    <div class='col-12 px-0 mx-auto'>
+                      <div class="card-group" style="flex-direction: row;">
+
                 {% else %}
-                  </div><hr />
+                    <div class="card mr-1" style="border:0;">
+                      {% include 'products/snippets/beverage_card.html' with instance=obj %}
+                    </div>
+                    
                 {% endif %}
-        {% endfor %} 
-    {% endif %}
-{% endfor %}
+              
+
+            {% endfor %} 
+        {% endif %}
+    {% endfor %}
+</div>
