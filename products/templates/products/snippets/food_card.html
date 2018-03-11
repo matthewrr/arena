@@ -1,6 +1,6 @@
 {% load static %}
 <!-- Script -->
-
+{% csrf_token %}
 {% if instance.image %}
   <a style="height:120px; overflow:hidden;" href="{{ instance.get_absolute_url }}">
     <img class="card-img-top" src="{{ instance.image.url }}" alt="{{ instance.title }} logo">
@@ -14,17 +14,15 @@
       {% if instance.diet %}
         {% for item in instance.diet %}
           {% if item == "vegetarian" %}
-<div class='container'>
- <a href="#" data-toggle="tooltip" title="Tooltip text"><img class="align-top" style="width: 15px;" src="/media/products/11111/v3.png" alt="vegetarian icon"/></a>
-</div>
-            
+             <a href="#" data-toggle="tooltip" title="Vegetarian"><img class="align-top" style="width: 15px;" src="/media/products/11111/v3.png" alt="vegetarian icon"/></a>
           {% elif item == "vegetarian_option" %}
-            <img class="align-top" style="width: 15px;" src="/media/products/11111/v4.png" alt="vegetarian option icon"/>
+             <a href="#" data-toggle="tooltip" title="Vegetarian Option"><img class="align-top" style="width: 15px;" src="/media/products/11111/v4.png" alt="vegetarian option icon"/></a>
           {% endif %}
+          
           {% if item == "gluten_free" %}
-            <img class="align-top" style="width: 15px;" src="/media/products/11111/gf4.png" alt="gluten-free icon"/>
+            <a href="#" data-toggle="tooltip" title="Gluten-Free"><img class="align-top" style="width: 15px;" src="/media/products/11111/gf4.png" alt="gluten-free icon"/></a>
           {% elif item == "gluten_free_option" %}
-            <img class="align-top" style="width: 15px;" src="/media/products/11111/gf3.png" alt="gluten-free option icon"/>
+            <a href="#" data-toggle="tooltip" title="Gluten-Free Option" style="white-space:nowrap"><img class="align-top" style="width: 15px;" src="/media/products/11111/gf3.png" alt="gluten-free option icon"/></a>
           {% endif %}
         {% endfor %}
     {% endif %}
@@ -32,11 +30,11 @@
   
   <p class="card-text mb-0" style="font-size: 11px; line-height: 1.2em; font-weight: 400;letter-spacing: -.2px;"> {{ instance.description|truncatewords:12 }}</p>
 
-  <button class="btn btn-link pl-0 pb-0 pt-0" type="button"  data-toggle="modal" data-target="#exampleModal">
+  <button class="btn btn-link pl-0 pb-0 pt-0" type="button"  data-toggle="modal" data-target="#{{instance.slug}}">
     <img class="align-baseline" style="width: 10px;" src="/media/products/11111/location-cursor.png" alt="location icon"/> 
-    <a style="font-size:14px;">Locate</a>
+    <a style="font-size:14px;">Near Section {{ instance.stand_location }}</a>
   </button>
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="{{instance.slug}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -53,14 +51,25 @@
           </button>
         </div>
         <div class="modal-body">
-          <input class="form-control form-control-sm" type="text" placeholder="Your Section"> <br />
-          <img class="align-top" style="width:100%;" src="/media/products/11111/map.png" alt="arena map"/>
-
-<!--#
-<a href="#" style="font-size: 12px; font-weight: 600;">
-  <img class="align-baseline" style="width: 10px;" src="/media/products/11111/location-cursor.png" alt="location icon"/> Locate
-</a>
--->
+          
+          
+          
+          
+          
+          <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+              <form action="/create_post/" method="POST" class="col-12 form-inline" id="post-form">
+                <div class="form-group">
+                  <input class="form-control form-control-sm mt-3" type="text" placeholder="Your Section">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm ml-2">Update</button>
+              </form>
+            </div>
+          </div>
+          
+            
+          <img class="align-top" id="erase-this" style="width:100%;" src="/media/products/11111/{{ instance.stand_location }}.png" alt="arena map"/>
+        
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
