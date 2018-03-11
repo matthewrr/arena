@@ -1,78 +1,30 @@
 {% extends "base.html" %}
-
 {% block content %}
-
 
 <div class="text-center">
   <img class="align-top pb-2 pt-3" src="/media/products/11111/arena-logo.svg" alt="arena logo"/>
 </div>
-  <div class='mb-3'>  
-    {% if request.GET.q %}
-      <div class='col-12'>
-        Results for {{ request.GET.q }}
-        <hr />
-      </div>
-    {% else %}
-      <div class='col-12 mx-auto pt-0 px-0'>
-          <form method='GET' action='{% url "search:query" %}' class="form my-2 my-lg-0">
-            {% include 'search/search-form/query.html' %}
-            {% include 'search/search-form/toggle.html' %}
-          </form>
-      </div>
-     <div class='col-12'>
-          <hr class="my-2" />
-      </div>
-    {% endif %}
-  </div>
-
-
-<!--
-  <input type="button" value="Update" id="selection-button">
--->
-
-
-
-<div class='col-12 text-right p-0'>
-  <div class="dropdown pb-2">
-    <!-- <a class="align-middle" style="font-weight:500;">Sort By: </a> -->
-    <button class="btn btn-secondary dropdown-toggle" style="padding:0.15rem .75rem;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Best Match
-    </button>
-    <div class="dropdown-menu dropdown-menu-right">
-      <button class="dropdown-item" type="button">Price (Low-High)</button>
-      <button class="dropdown-item" type="button">Price (High-Low)</button>
-      <button class="dropdown-item" type="button">Location (Nearest First)</button>
-      <div class="dropdown-divider"></div>
-      <button class="dropdown-item" type="button">Best Match</button>
+<div class='mb-3'>  
+  {% if request.GET.q %}
+    <div class='col-12'>
+      Results for {{ request.GET.q }}
+      <hr />
     </div>
-  </div>
+  {% else %}
+    <div class='col-12 mx-auto pt-0 px-0'>
+        <form method='GET' action='{% url "search:query" %}' class="form my-2 my-lg-0">
+          {% include 'search/search-form/query.html' %}
+          {% include 'search/search-form/toggle.html' %}
+        </form>
+    </div>
+   <div class='col-12'>
+        <hr class="my-2" />
+    </div>
+  {% endif %}
 </div>
 
+{% include 'search/snippets/food_view.html' %}
+{% include 'search/snippets/beverage_view.html' %}
 
-
-    {% include 'search/snippets/food_view.html' %}
-
-<div class='container container-fluid bg-light rounded p-2 mx-3'>
-  <div class="dropdown">
-    Sort By:
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Best Match
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-      <button class="dropdown-item" type="button">Price (Low-High)</button>
-      <button class="dropdown-item" type="button">Price (High-Low)</button>
-      <button class="dropdown-item" type="button">ABV (Low-High)</button>
-      <button class="dropdown-item" type="button">ABV (High-Low)</button>
-      <button class="dropdown-item" type="button">IBU (Low-High)</button>
-      <button class="dropdown-item" type="button">IBU (High-Low)</button>
-      <button class="dropdown-item" type="button">Location (Nearest First)</button>
-      <div class="dropdown-divider"></div>
-      <button class="dropdown-item" type="button">Best Match</button>
-    </div>
-  </div>
-</div>
-  <div class='row'>
-    {% include 'search/snippets/beverage_view.html' %}
-  </div>
 
 {% endblock %}

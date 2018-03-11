@@ -1,30 +1,46 @@
-
-
-<div class='mb-3'>
-    {% for obj_class in object_list %}
-        {% if forloop.first %}
-         <div class='col-12 px-0 mx-auto'>
-            <div class="card-group" style="flex-direction: row;">
-              {% for obj in obj_class %}
-                
-                {% if forloop.counter|divisibleby:2 %}
-                    <div class="card ml-1" style="border:0;">
-                    {% include 'products/snippets/food_card.html' with instance=obj %}
-                    </div>
-
-                    </div></div>
-                    <div class='col-12 px-0 mx-auto'>
-                      <div class="card-group" style="flex-direction: row;">
-
-                {% else %}
-                    <div class="card mr-0" style="border:0;">
+{% if object_list.0 %}
+  <div class='col-12 text-right p-0'>
+    <div class="dropdown pb-2">
+      <!-- <a class="align-middle" style="font-weight:500;">Sort By: </a> -->
+      <button class="btn btn-secondary dropdown-toggle" style="padding:0.15rem .75rem;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Best Match
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <button class="dropdown-item" type="button">Price (Low-High)</button>
+        <button class="dropdown-item" type="button">Price (High-Low)</button>
+        <button class="dropdown-item" type="button">Location (Nearest First)</button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item" type="button">Best Match</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class='mb-3'>
+      {% for obj_class in object_list %}
+          {% if forloop.first %}
+           <div class='col-12 px-0 mx-auto'>
+              <div class="card-group" style="flex-direction: row;">
+                {% for obj in obj_class %}
+                  
+                  {% if forloop.counter|divisibleby:2 %}
+                      <div class="card ml-1" style="border:0;">
                       {% include 'products/snippets/food_card.html' with instance=obj %}
-                    </div>
-                    
-                {% endif %}
-              
-
-            {% endfor %} 
-        {% endif %}
-    {% endfor %}
-</div>
+                      </div>
+  
+                      </div></div>
+                      <div class='col-12 px-0 mx-auto'>
+                        <div class="card-group" style="flex-direction: row;">
+  
+                  {% else %}
+                      <div class="card mr-0" style="border:0;">
+                      {% include 'products/snippets/food_card.html' with instance=obj %}
+                      </div>
+                      
+                  {% endif %}
+                
+  
+              {% endfor %} 
+          {% endif %}
+      {% endfor %}
+  </div>
+{% endif %}
