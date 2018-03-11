@@ -1,6 +1,5 @@
 {% load static %}
 <!-- Script -->
-{% csrf_token %}
 {% if instance.image %}
   <a style="height:120px; overflow:hidden;" href="{{ instance.get_absolute_url }}">
     <img class="card-img-top" src="{{ instance.image.url }}" alt="{{ instance.title }} logo">
@@ -34,54 +33,12 @@
     <img class="align-baseline" style="width: 10px;" src="/media/products/11111/location-cursor.png" alt="location icon"/> 
     <a style="font-size:14px;">Near Section {{ instance.stand_location }}</a>
   </button>
-  <div class="modal fade" id="{{instance.slug}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{ instance.title }}
-            <div class="pt-0" style="line-height: .8;">
-              {% if instance.stand_name %}
-                <a class="h5" style="font-size: 12px;">Stand Name:</a><a style="font-size: 12px;"> {{instance.stand_name}}</a> </br>
-              {% endif %}
-              <a class="h5" style="font-size: 12px;">Located Near:</a><a style="font-size: 12px;"> Stand {{instance.stand_location}}</a> <br/>
-            </div>
-          </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          
-          
-          
-          
-          
-          <div class="container h-100">
-            <div class="row h-100 justify-content-center align-items-center">
-              <form action="/create_post/" method="POST" class="col-12 form-inline" id="post-form">
-                <div class="form-group">
-                  <input class="form-control form-control-sm mt-3" type="text" placeholder="Your Section">
-                </div>
-                <button type="submit" class="btn btn-primary btn-sm ml-2">Update</button>
-              </form>
-            </div>
-          </div>
-          
-            
-          <img class="align-top" id="erase-this" style="width:100%;" src="/media/products/11111/{{ instance.stand_location }}.png" alt="arena map"/>
-        
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+  {% include 'products/snippets/modal_card.html' %}
+
+  </div>
+    <div class="card-footer" style="padding: .3rem .5rem; border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);border-bottom: 1px solid rgba(0,0,0,.125);">  
+      <div class="card-block">
+        <span><a class="card-text pull-left mb-0">${{instance.price}}</a></span>
+        <a href="{{ instance.get_absolute_url }}" class="btn btn-primary pull-right" style="padding: .3rem .75rem;font-size: .75rem;line-height: 1;border-radius: .2rem;">View</a>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="card-footer" style="padding: .3rem .5rem; border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);border-bottom: 1px solid rgba(0,0,0,.125);">  
-  <div class="card-block">
-    <span><a class="card-text pull-left mb-0">${{instance.price}}</a></span>
-    <a href="{{ instance.get_absolute_url }}" class="btn btn-primary pull-right" style="padding: .3rem .75rem;font-size: .75rem;line-height: 1;border-radius: .2rem;">View</a>
-  </div>
-</div>

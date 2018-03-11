@@ -1,0 +1,39 @@
+<div class="modal fade" id="{{instance.slug}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ instance.title }}
+          <div class="pt-0" style="line-height: .8;">
+            {% if instance.stand_name %}
+              <a class="h5" style="font-size: 12px;">Stand Name:</a><a style="font-size: 12px;"> {{instance.stand_name}}</a> </br>
+            {% endif %}
+            <a class="h5" style="font-size: 12px;">Located Near:</a><a style="font-size: 12px;"> Stand {{instance.stand_location}}</a> <br/>
+          </div>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="container h-100">
+          <div class="row h-100 justify-content-center align-items-center">
+            <form action="/create_post/" method="POST" class="col-12 form-inline" id="post-form">
+              <div class="form-group">
+                <input class="form-control form-control-sm mt-3" type="text" placeholder="Your Section">
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm ml-2">Update</button>
+            </form>
+          </div>
+        </div>
+        <img class="align-top" id="erase-this" style="width:100%;" src="/media/products/11111/{{ instance.stand_location }}.png" alt="arena map"/>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      
+    </div>
+  </div>
+</div>

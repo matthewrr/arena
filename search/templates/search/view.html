@@ -15,8 +15,8 @@
     {% else %}
       <div class='col-12 mx-auto pt-0 px-0'>
           <form method='GET' action='{% url "search:query" %}' class="form my-2 my-lg-0">
-            {% include 'search/snippets/query.html' %}
-            {% include 'search/snippets/toggle.html' %}
+            {% include 'search/search-form/query.html' %}
+            {% include 'search/search-form/toggle.html' %}
           </form>
       </div>
      <div class='col-12'>
