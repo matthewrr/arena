@@ -37,6 +37,7 @@ def product_list_view(request):
 class ProductDetailSlugView(DetailView):
     #queryset = Product.objects.all()
     queryset = Product.objects.select_subclasses()
+    #template_name = "products/detail.html"
     template_name = "products/detail.html"
     
     def get_object(self, *args, **kwargs):
@@ -44,11 +45,11 @@ class ProductDetailSlugView(DetailView):
         slug = self.kwargs.get('slug')
         #instance = get_object_or_404(Product, slug=slug, active=True)
         try:
-            instance = Product.objects.get(slug=slug, active=True).select_subclasses()
+            instance = Product.objects.get(slug=slug, active=True)
         except Product.DoesNotExist:
             raise Http404("Not found...")
         except Product.MultipleObjectsReturned:
-            qs = Product.objects.filter(slug=slug, active=True).select_subclasses()
+            qs = Product.objects.filter(slug=slug, active=True)
             instance = qs.first()
         except:
             raise Http404("Oh no!")

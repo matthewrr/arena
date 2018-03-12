@@ -1,9 +1,0 @@
-{% load static %}
-<!-- Script -->
-{% if instance.image %}
-  <a style="height:120px; overflow:hidden;" href="{{ instance.get_absolute_url }}">
-    <img class="card-img-top" src="{{ instance.image.url }}" alt="{{ instance.title }} logo">
-  </a>
-{% endif %}
-
-{% include 'products/snippets/food_card.html' %}

@@ -155,7 +155,7 @@ class Product(models.Model):
 
     title = models.CharField(max_length=120, default='')
     description = models.TextField()
-    price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(0)],default=0)
+    price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(1)],default=0)
     location = models.ManyToManyField(Location)
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     #image_exists = models.BooleanField(default=False)
@@ -199,7 +199,7 @@ class Food(Product):
     
     def diet_selection(self):
         return [label for value, label in self.fields['diet'].choices if value in self['diet'].value()]
-
+        
 class Beverage(Product):
     category = models.CharField(max_length=256, default='Beverage')
     company = models.CharField(max_length=256, default='')

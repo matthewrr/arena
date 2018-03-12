@@ -25,6 +25,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class FoodAdmin(admin.ModelAdmin):
     list_display = ['__str__','price','locations','slug','active','featured', 'image_uploaded']
+    exclude = ('category',)
     
     class Meta:
         model = Food
@@ -39,6 +40,7 @@ class FoodAdmin(admin.ModelAdmin):
     
 class BeverageAdmin(admin.ModelAdmin):
     list_display = ['__str__','price','locations','slug','active','featured','image_uploaded']
+    exclude = ('category',)
     
     class Meta:
         model = Beverage
