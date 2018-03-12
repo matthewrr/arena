@@ -24,7 +24,7 @@ class ProductAdmin(admin.ModelAdmin):
         return super(ProductAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
 class FoodAdmin(admin.ModelAdmin):
-    list_display = ['__str__','price','locations','slug','active','featured']
+    list_display = ['__str__','price','locations','slug','active','featured', 'image_uploaded']
     
     class Meta:
         model = Food
@@ -38,7 +38,7 @@ class FoodAdmin(admin.ModelAdmin):
         return super(FoodAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
     
 class BeverageAdmin(admin.ModelAdmin):
-    list_display = ['__str__','price','locations','slug','active','featured']
+    list_display = ['__str__','price','locations','slug','active','featured','image_uploaded']
     
     class Meta:
         model = Beverage

@@ -3,7 +3,8 @@
     <div class="modal-content">
       
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{ instance.title }}
+        <h5 class="modal-title" id="exampleModalLabel">
+          <a href="{{ instance.get_absolute_url }}" >{{ instance.title }}</a>
           <div class="pt-0" style="line-height: .8;">
             {% if instance.stand_name %}
               <a class="h5" style="font-size: 12px;">Stand Name:</a><a style="font-size: 12px;"> {{instance.stand_name}}</a> </br>

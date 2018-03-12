@@ -1,13 +1,14 @@
 {% load static %}
 <!-- Script -->
 {% if instance.image %}
-  <a style="height:120px; overflow:hidden;" href="{{ instance.get_absolute_url }}">
+  <a style="height:112px; overflow:hidden;" href="{{ instance.get_absolute_url }}">
     <img class="card-img-top" src="{{ instance.image.url }}" alt="{{ instance.title }} logo">
   </a>
 {% endif %}
 
 <div class="card-body p-2" style="border: 1px solid rgba(0,0,0,.125); */border-radius: 0;border-bottom: 0px;">
     
+  <div class="card-block">
   <h6 class="card-title mb-1" style="font-size: 12px; font-weight: 700;">
     {{ instance.title }}
       {% if instance.diet %}
@@ -31,10 +32,17 @@
 
   <button class="btn btn-link pl-0 pb-0 pt-0" type="button"  data-toggle="modal" data-target="#{{instance.slug}}">
     <img class="align-baseline" style="width: 10px;" src="/media/products/11111/location-cursor.png" alt="location icon"/> 
-    <a style="font-size:14px;">Near Section {{ instance.stand_location }}</a>
+    <a class="card-link" style="font-size:14px;">
+        {% if instance.stand_location|length == 3 %}
+          Near Section {{ instance.stand_location }}
+        {% else %}
+          Near Sections: {{ instance.stand_location|truncatewords:1 }}
+        {% endif %}
+    </a>
   </button>
-  
-  {% include 'products/snippets/modal_card.html' %}
+  </div>
+    {% include 'products/snippets/modal_card.html' %}
+
 
 </div>
 

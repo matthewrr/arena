@@ -166,7 +166,10 @@ class Product(models.Model):
 
     filter_horizontal = ('my_m2m_field',)
     objects = InheritanceManager()
-
+    
+    def image_uploaded(self):
+        return True if self.image else False
+        
     def locations(self):
         return ",\n".join([str(item) for item in self.location.all()])
 

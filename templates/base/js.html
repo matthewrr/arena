@@ -14,10 +14,9 @@
   $(document).ready(function(){
    // Initialize
    $('[data-toggle="tooltip"]').tooltip({container: 'body'});
-   $('#post-form').on('submit', function(event){
-    event.preventDefault();
-    console.log("form submitted!")  // sanity check
-   });
+   $(function(){
+   $("#imgUser").load("images/testimg.jpg");  
+});
 });
 </script>
 
