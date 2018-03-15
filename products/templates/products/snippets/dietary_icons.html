@@ -1,0 +1,15 @@
+{% if instance.diet %}
+  {% for item in instance.diet %}
+    {% if item == "vegetarian" %}
+       <a href="#" data-toggle="tooltip" title="Vegetarian"><img class="align-top" style="width: 15px;" src="/media/products/11111/v3.png" alt="vegetarian icon"/></a>
+    {% elif item == "vegetarian_option" %}
+       <a href="#" data-toggle="tooltip" title="Vegetarian Option"><img class="align-top" style="width: 15px;" src="/media/products/11111/v4.png" alt="vegetarian option icon"/></a>
+    {% endif %}
+    
+    {% if item == "gluten_free" %}
+      <a href="#" data-toggle="tooltip" title="Gluten-Free"><img class="align-top" style="width: 15px;" src="/media/products/11111/gf4.png" alt="gluten-free icon"/></a>
+    {% elif item == "gluten_free_option" %}
+      <a href="#" data-toggle="tooltip" title="Gluten-Free Option" style="white-space:nowrap"><img class="align-top" style="width: 15px;" src="/media/products/11111/gf3.png" alt="gluten-free option icon"/></a>
+    {% endif %}
+  {% endfor %}
+{% endif %}

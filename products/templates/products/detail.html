@@ -1,16 +1,76 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class='row'>
-    <div class='col-12 col-md-6'>
-        <h1>{{ object.title }}</h1><br/>
-        {{ object.timestamp|timesince }} ago
-        <h3>{{ "some title here"|title  }}</h3>
-        {{ object.description|linebreaks }} <br/>
-        {% if object.image %}
-            <img src='{{ object.image.url }}' class='img-fluid' />
-        {% endif %}
+
+<div class="row">
+    <div class="col-11 mx-auto mt-4">
+        <div class="card" >
+          <img class="card-img-top" src='{{ object.image.url }}' alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title mb-0">{{ object.title }} {% include 'products/snippets/dietary_icons.html' with instance=object.food %}</h5>
+                <p class="mb-2" style="line-height:1.2em;font-size:13px;">
+                {% if not object.stand %}
+                    
+                        <a style="font-weight:600">Crust Pizza</a> | Section {{ object.stand_location }}<br />
+                {% else %}
+                   Located Near: Section {{ object.stand_location }} (See Menu)
+                {% endif %}
+                </p>
+            <hr class="m-0" />
+            <p class="card-text mt-2">
+                <a style="font-weight:700;color:#AAA;">{{ object.food.course|upper }}</a> - {{ object.description }}.
+            </p>
+            <hr />
+
+            
+            
+            
+            
+            <p>
+              <button class="btn btn-link pl-0 pb-0 pt-0" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                All Ingredients
+              </button>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <p> Lettuce, Tomatoes, Dressing, Chicken, Lasagna, Alcohol, Red Beans, Apples, Olive Oil, Salt, Pepper, Sugar, Water, Milk, Steak, Beef, Black Beans</p>
+            </div>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>       
     </div>
 </div>
+
+
+
+<!--<div class='row'>-->
+<!--    <div class='col-12 col-md-6'>-->
+<!--        {% if object.image %}-->
+<!--            <img src='{{ object.image.url }}' class='img-fluid' />-->
+<!--        {% endif %}-->
+<!--        <h1>{{ object.title }}</h1><br/>-->
+<!--        {% if object.food.diet %}-->
+<!--            {% include 'products/snippets/dietary_icons.html' with instance=object.food %}-->
+<!--        {% endif %}-->
+        
+        
+        
+        
+<!--        {{ object.food.course }}{{ object.description|linebreaks }} <br />-->
+<!--        Ingredients: <br />-->
+<!--        ${{ object.price }} <br />-->
+        
+<!--        <button class="btn btn-link pl-0 pb-0 pt-0" type="button"  data-toggle="modal" data-target="#{{object.slug}}">-->
+<!--            <img class="align-baseline" style="width: 10px;" src="/media/products/11111/location-cursor.png" alt="location icon"/> -->
+<!--            <a class="card-link" style="font-size:14px;">-->
+<!--                {% if object.stand_location|length == 3 %}-->
+<!--                  Near Section {{ object.stand_location }}-->
+<!--                {% else %}-->
+<!--                  Near Sections: {{ object.stand_location|truncatewords:1 }}-->
+<!--                {% endif %}-->
+<!--            </a>-->
+<!--      </button>-->
+<!--      {% include 'products/snippets/modal_card.html' with instance=object.food %}-->
+<!--  </div>-->
+<!--</div>-->
     
 {% endblock %}
