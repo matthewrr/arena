@@ -12,26 +12,29 @@
 <script type="text/javascript">
   
     $(document).ready(function(){
-        // Initialize
         $('[data-toggle="tooltip"]').tooltip({container: 'body'});
-        $( ".section-form" ).submit(function( event ) {
-            event.preventDefault();
-        });
-       
+        $( ".section-form" ).submit(function( event ) {event.preventDefault();});
         $('.update').on({
             'click': function(){
-                var div_id = $(this).siblings('div').children('input').attr('id');
-                alert(div_id);
-                div_id = '#' + div_id
+                var div_id = '#' + $(this).siblings('input').attr('id');
                 var value = $(div_id).val();
-                var newmap = '/media/products/11111/' + value + '.png';
-                $('.topmap').attr('src',newmap).show();
+                var newmap = '/media/locations/section/' + value + '.png';
+                $.get(newmap)
+                    .done(function() { 
+                        $('.invalid-feedback').hide();
+                        $('.topmap').attr('src',newmap).show();
+                
+                    }).fail(function() { 
+                        $('.topmap').attr('src',newmap).hide();
+                        $('.invalid-feedback').show();
+                    })
+                
+                
+                
+                
             }
-        });    
-        // $('.arenamap').on({
-        //     'click': function(){
-        //         $(this).attr('src','/media/products/11111/wave.jpg');
-        //     }
-        // });
+        });
+        
     });
+    
 </script>

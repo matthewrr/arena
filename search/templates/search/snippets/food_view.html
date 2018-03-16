@@ -19,11 +19,11 @@
       {% for obj_class in object_list %}
           {% if forloop.first %}
            <div class='col-12 px-0 mx-auto'>
-              <div class="card-group" style="flex-direction: row;">
+              <div class="card-deck" style="flex-direction: row; width:100%;">
                 {% for obj in obj_class %}
                   
                   {% if forloop.counter|divisibleby:2 %}
-                      <div class="card ml-1" style="border:0;">
+                      <div class="card ml-1" style="border:0; width:100%;">
                       {% include 'products/snippets/food_card.html' with instance=obj %}
                       </div>
   
@@ -32,7 +32,7 @@
                         <div class="card-group" style="flex-direction: row;">
   
                   {% else %}
-                      <div class="card mr-0" style="border:0;">
+                      <div class="card mr-0" style="border:0; width:100%;">
                       {% include 'products/snippets/food_card.html' with instance=obj %}
                       </div>
                       
