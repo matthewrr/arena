@@ -163,9 +163,13 @@ class Product(models.Model):
     active = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add = True)
-
+    stand = models.CharField(max_length=256, default='Food')
+    
+    
     filter_horizontal = ('my_m2m_field',)
     objects = InheritanceManager()
+    
+    
     
     def image_uploaded(self):
         return True if self.image else False

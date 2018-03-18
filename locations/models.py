@@ -7,7 +7,7 @@ from arena.utils import unique_slug_generator
 class Location(models.Model):
     stand_name = models.CharField(max_length=200,default='')
     stand_location = models.CharField(max_length=200,default='')
-    stand = models.BooleanField(default=False)
+    stand = models.CharField(max_length=200, null=True, blank=True)
     active = models.BooleanField(default=True)
     outside_vendor = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
