@@ -10,7 +10,7 @@ from .filters import DropdownFilter
 # Qs: How have access to obj? Why vars in quotes. Why location defined afterwards?
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['__str__','price','locations','slug','active','featured']
+    list_display = ['__str__','price','locations','slug','active']
     
     class Meta:
         model = Product
@@ -24,7 +24,7 @@ class ProductAdmin(admin.ModelAdmin):
         return super(ProductAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
 class FoodAdmin(admin.ModelAdmin):
-    list_display = ['__str__','price','course','slug','active','featured', 'image_uploaded']
+    list_display = ['__str__','price','course','slug','active','image_uploaded']
     list_filter = (
         ('location__stand_name',DropdownFilter),
         'active','diet','course',

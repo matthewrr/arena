@@ -1,40 +1,73 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
 <div class="row">
     <div class="col-11 mx-auto mt-4">
         <div class="card" >
-          <img class="card-img-top" src='{{ object.image.url }}' alt="Card image cap">
-          <div class="card-body">
+          <a style="height:225px; overflow:hidden;">
+            <img class="card-img-top" src='{{ object.image.url }}' alt="Card image cap">
+          </a>
+          <div class="card-body" style="line-height:1.3;">
             <h5 class="card-title mb-0">{{ object.title }} {% include 'products/snippets/dietary_icons.html' with instance=object.food %}</h5>
-                <p class="mb-2" style="line-height:1.2em;font-size:13px;">
+            <p class="mb-2" style="line-height:1.2em;font-size:13px;">
                 {% if not object.stand %}
-                    
-                        <a style="font-weight:600">Crust Pizza</a> | Section {{ object.stand_location }}<br />
+                  <a style="font-weight:600">Crust Pizza</a> | Section {{ object.stand_location }}<br />
                 {% else %}
                    Located Near: Section {{ object.stand_location }} (See Menu)
                 {% endif %}
-                </p>
+            </p>
+          
             <hr class="m-0" />
-            <p class="card-text mt-2">
-                <a style="font-weight:700;color:#AAA;">{{ object.food.course|upper }}</a> - {{ object.description }}.
-            </p>
-            <hr />
-
             
-            
-            
-            
-            <p>
-              <button class="btn btn-link pl-0 pb-0 pt-0" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                All Ingredients
-              </button>
-            </p>
-            <div class="collapse" id="collapseExample">
-                <p> Lettuce, Tomatoes, Dressing, Chicken, Lasagna, Alcohol, Red Beans, Apples, Olive Oil, Salt, Pepper, Sugar, Water, Milk, Steak, Beef, Black Beans</p>
+            <div class="pt-2">
+              <a style="font-weight:700;color:#AAA;">{{ object.food.course|upper }}</a> 
+              <a>- {{ object.description }}.</a>
+              <br />
             </div>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            
+            <div>
+              <div class="my-0">
+                <button class="btn btn-link p-0" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  See All Ingredients
+                </button>
+              </div>
+              <div class="collapse" id="collapseExample">
+                  <p class="font-italic mb-0" style="font-size:12px; font-color:#333;"> Lettuce, Tomatoes, Dressing, Chicken, Lasagna, Alcohol, Red Beans, Apples, Olive Oil, Salt, Pepper, Sugar, Water, Milk, Steak, Beef, Black Beans</p>
+              </div>
+            </div>
+            
+          </div>
+          
+          <div class="card-footer" style="line-height:1.3;">
+            <button class="btn btn-link p-0" type="button" data-toggle="collapse" data-target="#rating-form" aria-expanded="false" aria-controls="collapseExample">
+                  <a style="font-weight:600">Tried it? Let us know your thoughts!</a><br />
+            </button>
+            
+            <div class=" collapse rating-form mt-1" style="line-height:1.5;" id="rating-form">  
+              Rating: 
+                <span class="fa fa-star checked" style="color:#FFC058"></span>
+                <span class="fa fa-star checked" style="color:#FFC058"></span>
+                <span class="fa fa-star checked" style="color:#FFC058"></span>
+                <span class="fa fa-star" style="color:#FFC058"></span>
+                <span class="fa fa-star" style="color:#FFC058"></span>
+              <br />
+
+              Would You Recommend?
+                <div class="form-check form-check-inline ml-1 mr-0">
+                  <input class="form-check-input mx-0" style="margin-top:2px;" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <label class="form-check-label mx-0 align-top" for="inlineRadio1">Yes</label>
+                </div>
+                <div class="form-check form-check-inline ml-2 mr-0">
+                  <input class="form-check-input mx-0" style="margin-top:2px;" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                  <label class="form-check-label mx-0 align-top" for="inlineRadio2">No</label>
+                </div>
+ 
+              <div class="form-group" style="margin-bottom:.5em;"><textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Optional Comments" rows="2"></textarea></div>
+                            
+              <button type="submit" class="btn btn-primary btn-sm float-right mb-0">Submit</button>
+            </div>
           </div>
         </div>       
     </div>
