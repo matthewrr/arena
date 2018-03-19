@@ -24,7 +24,7 @@ class ProductAdmin(admin.ModelAdmin):
         return super(ProductAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
 class FoodAdmin(admin.ModelAdmin):
-    list_display = ['__str__','price','slug','active','featured', 'image_uploaded']
+    list_display = ['__str__','price','course','slug','active','featured', 'image_uploaded']
     list_filter = (
         ('location__stand_name',DropdownFilter),
         'active','diet','course',
@@ -32,7 +32,7 @@ class FoodAdmin(admin.ModelAdmin):
     search_fields = (
         'title', 'description',
     )
-    exclude = ('category',)
+    exclude = ('category','stand')
     
     class Meta:
         model = Food

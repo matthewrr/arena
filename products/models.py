@@ -22,7 +22,7 @@ CATEGORY = [
     ('beverage','Beverage'),
 ]
 COURSE = [
-    ('appetizer','Appetizer'),
+    ('appetizer','Snack/Appetizer'),
     ('entree', 'Entree'),
     ('dessert', 'Dessert'),
 ]
