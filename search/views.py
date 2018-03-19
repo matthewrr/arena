@@ -13,6 +13,7 @@ from products.models import Product, Beverage, Food
 #title, description, price, location, image, slug, active, featured
 #beverage: comapny, company_location,beverage_type, alcohol_type, serving_type abv, ibu
 #food: course, dietary_restrictions
+
 class SearchProductView(ListView):
     template_name = "search/view.html"
     
@@ -34,12 +35,6 @@ class SearchProductView(ListView):
         
         beverage = Beverage.objects.all()
         food = Food.objects.all()
-        
-        # for b in beverage:
-        #     print(b.__class__.__name__)
-        
-        # for f in food:
-        #     print(f.__class__.__name__)
         
         if query:
             query_list = query.split(' ')
@@ -84,15 +79,9 @@ class SearchProductView(ListView):
                     reduce(operator.or_, (Q(serving_type__icontains=q) for q in serving_type))
                 )
         
-        #result_list = chain(food, beverage)
         if category and 'beverage' not in category:
             beverage = None
         if category and 'food' not in category:
             food = None
-        # if category == 'beverage':
-        #     food = None
-        # if category == 'food':
-        #     beverage = None
-        
-        
+
         return (food, beverage)
