@@ -156,6 +156,9 @@ class Product(models.Model):
     title = models.CharField(max_length=120, default='')
     description = models.TextField()
     price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(1)],default=0)
+    food_cost = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(1)],default=0)
+    #serving_cost
+    profit = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(1)],default=0)
     location = models.ManyToManyField(Location)
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     #image_exists = models.BooleanField(default=False)
@@ -195,6 +198,7 @@ class Product(models.Model):
 
 class Food(Product):
     category = models.CharField(max_length=256, default='Food')
+    ingredients = models.TextField()
     course = models.CharField(max_length=256, choices=COURSE, default='')
     diet = MultiSelectField(choices=DIET, blank=True) #why pull choices name
     
