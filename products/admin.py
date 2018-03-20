@@ -3,11 +3,18 @@ from django.contrib.admin import widgets
 from django.db import models
 from django.forms import CheckboxSelectMultiple
 
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 from .models import Product, Food, Beverage
 from .filters import DropdownFilter
 
 # Register your models here.
 # Qs: How have access to obj? Why vars in quotes. Why location defined afterwards?
+
+class FoodResource(resources.ModelResource):
+
+    class Meta:
+        model = Food
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['__str__','price','locations','slug','active']
@@ -23,7 +30,7 @@ class ProductAdmin(admin.ModelAdmin):
         )
         return super(ProductAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
-class FoodAdmin(admin.ModelAdmin):
+class FoodAdmin(ImportExportModelAdmin,admin.ModelAdmin):
     list_display = ['__str__','price','course','slug','active','image_uploaded']
     list_filter = (
         ('location__stand_name',DropdownFilter),
@@ -33,7 +40,9 @@ class FoodAdmin(admin.ModelAdmin):
         'title', 'description',
     )
     exclude = ('category','stand')
-    
+
+    resource_class = FoodResource
+
     class Meta:
         model = Food
 
