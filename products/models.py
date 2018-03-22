@@ -32,6 +32,18 @@ DIET = [
     ('gluten_free','Gluten-Free'),
     ('gluten_free_option', 'Gluten-Free Option'),
 ]
+
+VEGETARIAN = [
+    ('none','None'),
+    ('vegetarian', 'Vegetarian'),
+    ('vegetarian_option', 'Vegetarian Option'),
+]
+
+GLUTEN_FREE = [
+    ('none','None'),
+    ('gluten_free', 'Gluten-Free'),
+    ('gluten_free_option', 'Gluten-Free Option'),
+]
 BEVERAGE_TYPE = [
     ('alcohol', 'Alcohol'),
     ('non_alcohol', 'Non-Alcohol'),
@@ -156,9 +168,6 @@ class Product(models.Model):
     title = models.CharField(max_length=120, default='')
     description = models.TextField()
     price = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(1)],default=0)
-    food_cost = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(1)],default=0)
-    #serving_cost
-    profit = models.DecimalField(decimal_places=2,max_digits=5,validators=[MinValueValidator(1)],default=0)
     location = models.ManyToManyField(Location)
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     #image_exists = models.BooleanField(default=False)
@@ -198,9 +207,10 @@ class Product(models.Model):
 
 class Food(Product):
     category = models.CharField(max_length=256, default='Food')
-    ingredients = models.TextField()
     course = models.CharField(max_length=256, choices=COURSE, default='')
     diet = MultiSelectField(choices=DIET, blank=True) #why pull choices name
+    vegetarian = models.CharField(max_length=256, choices=VEGETARIAN, default='')
+    gluten_free = models.CharField(max_length=256, choices=GLUTEN_FREE, default='')
     
     def diet_selection(self):
         return [label for value, label in self.fields['diet'].choices if value in self['diet'].value()]
