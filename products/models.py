@@ -195,6 +195,10 @@ class Product(models.Model):
     def stand_name(self):
         return ",\n".join([item.stand_names() for item in self.location.all()])
     
+    def menu(self):
+        for item in self.location.all():
+            return item.menu()
+    
     def get_absolute_url(self):
         return reverse("products:detail", kwargs={"slug": self.slug})
 

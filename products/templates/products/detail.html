@@ -6,16 +6,23 @@
 <div class="row">
     <div class="col-11 mx-auto mt-4">
         <div class="card" >
-          <a style="height:225px; overflow:hidden;">
+          <a style="">
             <img class="card-img-top" src='{{ object.image.url }}' alt="Card image cap">
           </a>
-          <div class="card-body" style="line-height:1.3;">
+          <div class="card-body" style="line-height:1.5;">
             <h5 class="card-title mb-0">{{ object.title }} {% include 'products/snippets/dietary_icons.html' with instance=object.food %}</h5>
-            <p class="mb-2" style="line-height:1.2em;font-size:13px;">
+            <p class="mb-2" style="line-height:1.5em;font-size:14px;">
                 {% if not object.stand %}
                   <a style="font-weight:600">Crust Pizza</a> | Section {{ object.stand_location }}<br />
                 {% else %}
-                   Located Near: Section {{ object.stand_location }} (See Menu)
+                  
+                  <a style="font-weight:600">Location:</a> {{object.stand_name}}
+                  {% if object.menu != "" %}
+                    <a href='{{object.menu}}'>(Menu)</a>
+                  {% endif %}
+                  <br />
+                   Near Section {{ object.stand_location }}
+                  
                 {% endif %}
             </p>
           
@@ -39,71 +46,13 @@
             </div>
             
           </div>
-          
-          <div class="card-footer" style="line-height:1.3;">
-            <button class="btn btn-link p-0" type="button" data-toggle="collapse" data-target="#rating-form" aria-expanded="false" aria-controls="collapseExample">
-                  <a style="font-weight:600">Tried it? Let us know your thoughts!</a><br />
-            </button>
-            
-            <div class=" collapse rating-form mt-1" style="line-height:1.5;" id="rating-form">  
-              Rating: 
-                <span class="fa fa-star checked" style="color:#FFC058"></span>
-                <span class="fa fa-star checked" style="color:#FFC058"></span>
-                <span class="fa fa-star checked" style="color:#FFC058"></span>
-                <span class="fa fa-star" style="color:#FFC058"></span>
-                <span class="fa fa-star" style="color:#FFC058"></span>
-              <br />
-
-              Would You Recommend?
-                <div class="form-check form-check-inline ml-1 mr-0">
-                  <input class="form-check-input mx-0" style="margin-top:2px;" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                  <label class="form-check-label mx-0 align-top" for="inlineRadio1">Yes</label>
-                </div>
-                <div class="form-check form-check-inline ml-2 mr-0">
-                  <input class="form-check-input mx-0" style="margin-top:2px;" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                  <label class="form-check-label mx-0 align-top" for="inlineRadio2">No</label>
-                </div>
- 
-              <div class="form-group" style="margin-bottom:.5em;"><textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Optional Comments" rows="2"></textarea></div>
-                            
-              <button type="submit" class="btn btn-primary btn-sm float-right mb-0">Submit</button>
+            <div class="card-footer" style="line-height:1.3;">
+              <button class="btn btn-link pl-0 pb-0 pt-0" type="button"  data-toggle="modal" data-target="#customer-review">
+                <a class="card-link" style="font-weight:600">Tried it? Let us know your thoughts!</a><br />
+              </button>
             </div>
-          </div>
+          {% include 'products/snippets/modal_card2.html' %}
         </div>       
     </div>
 </div>
-
-
-
-<!--<div class='row'>-->
-<!--    <div class='col-12 col-md-6'>-->
-<!--        {% if object.image %}-->
-<!--            <img src='{{ object.image.url }}' class='img-fluid' />-->
-<!--        {% endif %}-->
-<!--        <h1>{{ object.title }}</h1><br/>-->
-<!--        {% if object.food.diet %}-->
-<!--            {% include 'products/snippets/dietary_icons.html' with instance=object.food %}-->
-<!--        {% endif %}-->
-        
-        
-        
-        
-<!--        {{ object.food.course }}{{ object.description|linebreaks }} <br />-->
-<!--        Ingredients: <br />-->
-<!--        ${{ object.price }} <br />-->
-        
-<!--        <button class="btn btn-link pl-0 pb-0 pt-0" type="button"  data-toggle="modal" data-target="#{{object.slug}}">-->
-<!--            <img class="align-baseline" style="width: 10px;" src="/media/products/11111/location-cursor.png" alt="location icon"/> -->
-<!--            <a class="card-link" style="font-size:14px;">-->
-<!--                {% if object.stand_location|length == 3 %}-->
-<!--                  Near Section {{ object.stand_location }}-->
-<!--                {% else %}-->
-<!--                  Near Sections: {{ object.stand_location|truncatewords:1 }}-->
-<!--                {% endif %}-->
-<!--            </a>-->
-<!--      </button>-->
-<!--      {% include 'products/snippets/modal_card.html' with instance=object.food %}-->
-<!--  </div>-->
-<!--</div>-->
-    
 {% endblock %}

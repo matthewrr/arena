@@ -1,0 +1,52 @@
+<div class="modal fade" id="customer-review" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-header bg-light">
+        <h5 class="modal-title display-4" id="exampleModalLabel" style="font-size:22px; font-weight:400;">
+          <a href="{{ instance.get_absolute_url }}" >{{ instance.title }}</a>
+          <div class="pt-0" style="line-height: .8;">
+            {{ object.title }}
+        </h5>
+      </div>
+      
+      <div class="modal-body">
+        <div class="container h-100 mx-auto">
+          <div class="row h-100 justify-content-center align-items-center">
+
+              <div class="form-row mx-auto justify-content-center col-12">
+            <div class="rating-form mt-1" style="line-height:1.5;" id="rating-form">  
+              Rating: 
+                <span class="fa fa-star checked" style="color:#FFC058"></span>
+                <span class="fa fa-star checked" style="color:#FFC058"></span>
+                <span class="fa fa-star checked" style="color:#FFC058"></span>
+                <span class="fa fa-star" style="color:#FFC058"></span>
+                <span class="fa fa-star" style="color:#FFC058"></span>
+              <br />
+
+              Would You Recommend?
+                <div class="form-check form-check-inline ml-1 mr-0">
+                  <input class="form-check-input mx-0" style="margin-top:2px;" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <label class="form-check-label mx-0 align-top" for="inlineRadio1">Yes</label>
+                </div>
+                <div class="form-check form-check-inline ml-2 mr-0">
+                  <input class="form-check-input mx-0" style="margin-top:2px;" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                  <label class="form-check-label mx-0 align-top" for="inlineRadio2">No</label>
+                </div>
+ 
+              <div class="form-group" style="margin-bottom:.5em;"><textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Optional Comments" rows="4"></textarea></div>
+                            
+              <button type="submit" class="btn btn-primary btn-sm float-right mb-0">Submit</button>
+            </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      
+      <!--<div class="modal-footer">-->
+      <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+      <!--</div>-->
+      
+    </div>
+  </div>
+</div>
